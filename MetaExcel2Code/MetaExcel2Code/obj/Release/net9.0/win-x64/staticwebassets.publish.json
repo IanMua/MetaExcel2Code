@@ -1,0 +1,20 @@
+{
+  "Version": 1,
+  "Hash": "ue0K4zJnKTwAClO15w95GOEtd2ge5yCBqIPQQlH0GRQ=",
+  "Source": "MetaExcel2Code",
+  "BasePath": "_content/MetaExcel2Code",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MetaExcel2Code\\wwwroot",
+      "Source": "MetaExcel2Code",
+      "ContentRoot": "F:\\Project\\Learn\\C#\\MetaExcel2Code\\MetaExcel2Code\\MetaExcel2Code\\wwwroot\\",
+      "BasePath": "_content/MetaExcel2Code",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}

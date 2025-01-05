@@ -1,0 +1,20 @@
+﻿{
+    "example": [
+        {
+            "name": "id",
+            "type": "number(id)"
+        },
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "age",
+            "type": "number"
+        },
+        {
+            "name": "children",
+            "type": "array<number>"
+        }
+    ]
+}

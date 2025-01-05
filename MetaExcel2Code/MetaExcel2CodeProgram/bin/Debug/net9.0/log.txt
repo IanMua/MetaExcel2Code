@@ -1,0 +1,217 @@
+2025-01-05 13:39:22.127 +08:00 [INF] 应用启动 "2025-01-05T13:39:22.1234028+08:00"
+2025-01-05 13:39:22.207 +08:00 [ERR] Error: Could not find a part of the path 'F:\Project\Learn\C#\MetaExcel2Code\MetaExcel2Code\MetaExcel2CodeProgram\bin\Debug\net9.0\Configs\AppConfig.json'.
+2025-01-05 13:43:07.004 +08:00 [INF] 应用启动 "2025-01-05T13:43:06.9985531+08:00"
+2025-01-05 13:43:07.108 +08:00 [ERR] Error: Unexpected character encountered while parsing value: F. Path '', line 0, position 0.
+2025-01-05 13:43:32.636 +08:00 [INF] 应用启动 "2025-01-05T13:43:32.6326200+08:00"
+2025-01-05 13:43:32.745 +08:00 [ERR] Error: Unexpected character encountered while parsing value: F. Path '', line 0, position 0.
+2025-01-05 13:44:35.482 +08:00 [INF] 应用启动 "2025-01-05T13:44:35.4791265+08:00"
+2025-01-05 13:44:35.576 +08:00 [ERR] Error: Unexpected character encountered while parsing value: F. Path '', line 0, position 0.
+2025-01-05 13:46:10.711 +08:00 [INF] 应用启动 "2025-01-05T13:46:10.7079702+08:00"
+2025-01-05 13:46:10.750 +08:00 [INF] appConfigJsonFile: {
+    "logger": "info",
+    
+    "excelRootPath": "",
+    "jsonExportPath": "",
+    "codeExportPath": ""
+}
+2025-01-05 13:46:10.815 +08:00 [ERR] Error: Unexpected character encountered while parsing value: F. Path '', line 0, position 0.
+2025-01-05 13:46:34.369 +08:00 [INF] 应用启动 "2025-01-05T13:46:34.3664029+08:00"
+2025-01-05 13:46:34.415 +08:00 [INF] appConfigJsonFile: {
+    "logger": "info",
+    
+    "excelRootPath": "",
+    "jsonExportPath": "",
+    "codeExportPath": ""
+}
+2025-01-05 13:46:34.416 +08:00 [INF] typeConfigJsonFile: {
+    "example": [
+        {
+            "name": "id",
+            "type": "number(id)"
+        },
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "age",
+            "type": "number"
+        },
+        {
+            "name": "children",
+            "type": "array<number>"
+        }
+    ]
+}
+2025-01-05 13:46:34.479 +08:00 [ERR] Error: Unexpected character encountered while parsing value: F. Path '', line 0, position 0.
+2025-01-05 13:47:00.488 +08:00 [INF] 应用启动 "2025-01-05T13:47:00.4853283+08:00"
+2025-01-05 13:47:00.609 +08:00 [INF] appConfigJsonFile: {
+    "logger": "info",
+    
+    "excelRootPath": "",
+    "jsonExportPath": "",
+    "codeExportPath": ""
+}
+2025-01-05 13:47:00.610 +08:00 [INF] typeConfigJsonFile: {
+    "example": [
+        {
+            "name": "id",
+            "type": "number(id)"
+        },
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "age",
+            "type": "number"
+        },
+        {
+            "name": "children",
+            "type": "array<number>"
+        }
+    ]
+}
+2025-01-05 14:08:22.343 +08:00 [INF] 应用启动 "2025-01-05T14:08:22.3406555+08:00"
+2025-01-05 14:14:06.155 +08:00 [INF] 应用启动 "2025-01-05T14:14:06.1520559+08:00"
+2025-01-05 14:14:06.287 +08:00 [INF] TypeConfigname: , CustomTypes: 
+2025-01-05 14:14:28.732 +08:00 [INF] 应用启动 "2025-01-05T14:14:28.7299724+08:00"
+2025-01-05 14:14:28.858 +08:00 [INF] TypeConfigname: , CustomTypes: 
+2025-01-05 14:14:49.794 +08:00 [INF] 应用启动 "2025-01-05T14:14:49.7909704+08:00"
+2025-01-05 14:14:49.932 +08:00 [INF] TypeConfig: name: , CustomTypes: 
+2025-01-05 14:14:58.020 +08:00 [INF] 应用启动 "2025-01-05T14:14:58.0169382+08:00"
+2025-01-05 14:14:58.155 +08:00 [INF] TypeConfig: 
+name: , CustomTypes: 
+2025-01-05 14:21:47.516 +08:00 [INF] 应用启动 "2025-01-05T14:21:47.5127102+08:00"
+2025-01-05 14:21:47.655 +08:00 [INF] TypeConfig: 
+System.Collections.Generic.List`1[MetaExcel2CodeProgram.TypeConfig]
+2025-01-05 14:24:26.083 +08:00 [INF] 应用启动 "2025-01-05T14:24:26.0798734+08:00"
+2025-01-05 14:24:26.240 +08:00 [INF] TypeConfig: 
+[{"name":"example","types":[{"name":"id","type":"number(id)"},{"name":"name","type":"string"},{"name":"age","type":"number"},{"name":"children","type":"array<number>"}]}]
+2025-01-05 14:26:22.965 +08:00 [INF] 应用启动 "2025-01-05T14:26:22.9625340+08:00"
+2025-01-05 14:26:37.650 +08:00 [INF] 应用启动 "2025-01-05T14:26:37.6467149+08:00"
+2025-01-05 14:26:37.820 +08:00 [INF] {"example":{"name":"example","types":[{"name":"id","type":"number(id)"},{"name":"name","type":"string"},{"name":"age","type":"number"},{"name":"children","type":"array<number>"}]}
+2025-01-05 17:00:57.451 +08:00 [INF] 应用启动 "2025-01-05T17:00:57.4477808+08:00"
+2025-01-05 17:00:58.068 +08:00 [ERR] Error: [#DBPerk 表] [1行, 1列] -- $numbe 是未定义的类型
+2025-01-05 17:01:43.754 +08:00 [INF] 应用启动 "2025-01-05T17:01:43.7519102+08:00"
+2025-01-05 17:01:44.350 +08:00 [ERR] Error: [#DBPerk 表] [1行, 1列] -- $id 不是 number 类型
+2025-01-05 17:02:50.472 +08:00 [INF] 应用启动 "2025-01-05T17:02:50.4692255+08:00"
+2025-01-05 17:02:51.092 +08:00 [ERR] Error: [#DBPerk 表] [4行, 4列] -- $IProperty 是未定义的类型
+2025-01-05 17:04:06.816 +08:00 [INF] 应用启动 "2025-01-05T17:04:06.8132939+08:00"
+2025-01-05 17:04:07.432 +08:00 [ERR] Error: [#DBPerk 表] [4行, 4列] -- IProperty 是未定义的类型
+2025-01-05 17:05:34.999 +08:00 [INF] 应用启动 "2025-01-05T17:05:34.9969477+08:00"
+2025-01-05 17:05:35.616 +08:00 [ERR] Error: [#DBPerk 表] [4行, 4列] -- IProperty 是未定义的类型
+2025-01-05 17:07:08.188 +08:00 [INF] 应用启动 "2025-01-05T17:07:08.1854025+08:00"
+2025-01-05 17:07:08.801 +08:00 [ERR] Error: [#DBPerk 表] [4行, 4列] -- IProperty 是未定义的类型
+2025-01-05 17:08:46.376 +08:00 [INF] 应用启动 "2025-01-05T17:08:46.3726581+08:00"
+2025-01-05 17:08:46.569 +08:00 [INF] 自定义类型 {"example":{"name":"example","types":[{"name":"id","type":"number(id)"},{"name":"name","type":"string"},{"name":"age","type":"number"},{"name":"children","type":"array<number>"}]},"IProperty":{"name":"IProperty","types":[{"name":"type","type":"number"},{"name":"id","type":"number"},{"name":"count","type":"number"}]}}
+2025-01-05 17:08:47.053 +08:00 [ERR] Error: [#DBPerk 表] [4行, 4列] -- IProperty 是未定义的类型
+2025-01-05 17:09:14.599 +08:00 [INF] 应用启动 "2025-01-05T17:09:14.5963278+08:00"
+2025-01-05 17:09:14.755 +08:00 [INF] 自定义类型 ["example","IProperty"]
+2025-01-05 17:09:15.230 +08:00 [ERR] Error: [#DBPerk 表] [4行, 4列] -- IProperty 是未定义的类型
+2025-01-05 17:10:23.106 +08:00 [INF] 应用启动 "2025-01-05T17:10:23.1036561+08:00"
+2025-01-05 17:10:23.266 +08:00 [INF] 自定义类型 ["example","IProperty"]
+2025-01-05 17:10:23.733 +08:00 [INF] isCustomType: {0;10;5}, Contains: false
+2025-01-05 17:10:23.741 +08:00 [ERR] Error: [#DBPerk 表] [4行, 4列] -- IProperty 是未定义的类型
+2025-01-05 17:10:58.766 +08:00 [INF] 应用启动 "2025-01-05T17:10:58.7630555+08:00"
+2025-01-05 17:10:58.922 +08:00 [INF] 自定义类型 ["example","IProperty"]
+2025-01-05 17:10:59.392 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:10:59.394 +08:00 [INF] isCustomType: IRes, Contains: false
+2025-01-05 17:10:59.401 +08:00 [ERR] Error: [#DBPerk 表] [4行, 5列] -- IRes 是未定义的类型
+2025-01-05 17:11:29.009 +08:00 [INF] 应用启动 "2025-01-05T17:11:29.0069895+08:00"
+2025-01-05 17:11:29.171 +08:00 [INF] 自定义类型 ["example","IProperty","IRes"]
+2025-01-05 17:11:29.638 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:11:29.640 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:11:29.648 +08:00 [ERR] Error: [#DBPerk 表] [5行, 2列] -- 0 类型是错误的结构，正则匹配失败
+2025-01-05 17:14:02.330 +08:00 [INF] 应用启动 "2025-01-05T17:14:02.3275625+08:00"
+2025-01-05 17:14:02.477 +08:00 [INF] 自定义类型 ["example","IProperty","IRes"]
+2025-01-05 17:14:02.959 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.961 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.962 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.963 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.964 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.965 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.966 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.967 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.967 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.968 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.969 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.970 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.970 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.971 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.972 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.973 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.974 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.975 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.977 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.978 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.979 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.979 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.980 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.982 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.983 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.984 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.984 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.985 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.986 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.987 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.988 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.988 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.990 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.990 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.991 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.992 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.993 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.994 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.995 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.996 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:02.997 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:02.998 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.000 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.000 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.001 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.002 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.003 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.004 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.005 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.006 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.007 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.008 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.009 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.010 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.010 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.011 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.012 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.013 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.014 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.015 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.016 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.017 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.018 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.019 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.020 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.021 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.023 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.024 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.024 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.025 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.026 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.027 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.028 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.029 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:03.029 +08:00 [INF] isCustomType: IProperty, Contains: true
+2025-01-05 17:14:03.030 +08:00 [INF] isCustomType: IRes, Contains: true
+2025-01-05 17:14:30.694 +08:00 [INF] 应用启动 "2025-01-05T17:14:30.6916048+08:00"
+2025-01-05 17:14:30.861 +08:00 [INF] 自定义类型 ["example","IProperty","IRes"]
+2025-01-05 17:15:07.749 +08:00 [INF] 应用启动 "2025-01-05T17:15:07.7462222+08:00"
+2025-01-05 17:15:07.916 +08:00 [INF] 自定义类型 ["example","IProperty","IRes"]
+2025-01-05 17:15:08.395 +08:00 [INF] sheetData: {"sheetKeys":["number"],"sheetData":[{"id":0,"parentIds":[],"lvCap":1,"property":{"type":0,"id":10,"value":5},"cost":{"type":0,"id":101,"count":1}},{"id":1,"parentIds":[0],"lvCap":10,"property":{"type":2,"id":0,"value":2},"cost":{"type":0,"id":101,"count":2}},{"id":2,"parentIds":[0],"lvCap":10,"property":{"type":2,"id":1,"value":3},"cost":{"type":0,"id":101,"count":3}},{"id":3,"parentIds":[0],"lvCap":10,"property":{"type":0,"id":16,"value":5},"cost":{"type":0,"id":101,"count":4}},{"id":4,"parentIds":[1],"lvCap":10,"property":{"type":2,"id":2,"value":2},"cost":{"type":0,"id":101,"count":5}},{"id":5,"parentIds":[2],"lvCap":10,"property":{"type":0,"id":4,"value":2},"cost":{"type":0,"id":101,"count":6}},{"id":6,"parentIds":[3],"lvCap":10,"property":{"type":0,"id":15,"value":3},"cost":{"type":0,"id":101,"count":7}},{"id":7,"parentIds":[4,5,6],"lvCap":2,"property":{"type":0,"id":12,"value":5},"cost":{"type":0,"id":101,"count":8}},{"id":8,"parentIds":[7],"lvCap":15,"property":{"type":0,"id":19,"value":20},"cost":{"type":0,"id":101,"count":9}},{"id":9,"parentIds":[7],"lvCap":15,"property":{"type":0,"id":18,"value":20},"cost":{"type":0,"id":101,"count":10}},{"id":10,"parentIds":[8],"lvCap":10,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":11}},{"id":11,"parentIds":[9],"lvCap":10,"property":{"type":0,"id":17,"value":3},"cost":{"type":0,"id":101,"count":12}},{"id":12,"parentIds":[10,11],"lvCap":2,"property":{"type":0,"id":12,"value":5},"cost":{"type":0,"id":101,"count":13}},{"id":13,"parentIds":[12],"lvCap":20,"property":{"type":2,"id":0,"value":3},"cost":{"type":0,"id":101,"count":14}},{"id":14,"parentIds":[12],"lvCap":15,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":15}},{"id":15,"parentIds":[12],"lvCap":20,"property":{"type":0,"id":19,"value":40},"cost":{"type":0,"id":101,"count":16}},{"id":16,"parentIds":[13],"lvCap":20,"property":{"type":2,"id":2,"value":3},"cost":{"type":0,"id":101,"count":17}},{"id":17,"parentIds":[14],"lvCap":15,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":18}},{"id":18,"parentIds":[15],"lvCap":20,"property":{"type":0,"id":17,"value":10},"cost":{"type":0,"id":101,"count":19}},{"id":19,"parentIds":[16,17],"lvCap":20,"property":{"type":0,"id":9,"value":10},"cost":{"type":0,"id":101,"count":20}},{"id":20,"parentIds":[17,18],"lvCap":20,"property":{"type":0,"id":15,"value":10},"cost":{"type":0,"id":101,"count":21}},{"id":21,"parentIds":[19,20],"lvCap":30,"property":{"type":2,"id":3,"value":10},"cost":{"type":0,"id":101,"count":22}},{"id":22,"parentIds":[21],"lvCap":50,"property":{"type":2,"id":2,"value":10},"cost":{"type":0,"id":101,"count":23}},{"id":23,"parentIds":[21],"lvCap":50,"property":{"type":0,"id":8,"value":20},"cost":{"type":0,"id":101,"count":24}},{"id":24,"parentIds":[22,23],"lvCap":200,"property":{"type":0,"id":9,"value":100},"cost":{"type":0,"id":101,"count":25}},{"id":25,"parentIds":[24],"lvCap":100,"property":{"type":0,"id":10,"value":100},"cost":{"type":0,"id":101,"count":26}},{"id":26,"parentIds":[24],"lvCap":100,"property":{"type":0,"id":11,"value":100},"cost":{"type":0,"id":101,"count":27}},{"id":27,"parentIds":[24],"lvCap":100,"property":{"type":2,"id":0,"value":10},"cost":{"type":0,"id":101,"count":28}},{"id":28,"parentIds":[25],"lvCap":100,"property":{"type":0,"id":6,"value":100},"cost":{"type":0,"id":101,"count":29}},{"id":29,"parentIds":[26],"lvCap":100,"property":{"type":0,"id":19,"value":100},"cost":{"type":0,"id":101,"count":30}},{"id":30,"parentIds":[27],"lvCap":100,"property":{"type":2,"id":2,"value":10},"cost":{"type":0,"id":101,"count":31}},{"id":31,"parentIds":[28],"lvCap":100,"property":{"type":0,"id":6,"value":100},"cost":{"type":0,"id":101,"count":32}},{"id":32,"parentIds":[29],"lvCap":100,"property":{"type":0,"id":15,"value":100},"cost":{"type":0,"id":101,"count":33}},{"id":33,"parentIds":[30],"lvCap":10,"property":{"type":0,"id":4,"value":4},"cost":{"type":0,"id":101,"count":34}},{"id":34,"parentIds":[31,32,33],"lvCap":53,"property":{"type":2,"id":3,"value":20},"cost":{"type":0,"id":101,"count":35}},{"id":35,"parentIds":[34],"lvCap":100,"property":{"type":0,"id":10,"value":100},"cost":{"type":0,"id":101,"count":36}},{"id":36,"parentIds":[34],"lvCap":100,"property":{"type":0,"id":11,"value":200},"cost":{"type":0,"id":101,"count":37}},{"id":37,"parentIds":[35,36],"lvCap":250,"property":{"type":0,"id":9,"value":200},"cost":{"type":0,"id":101,"count":38}}]}
+2025-01-05 17:17:13.312 +08:00 [INF] 应用启动 "2025-01-05T17:17:13.3093028+08:00"
+2025-01-05 17:17:13.474 +08:00 [INF] 自定义类型 ["example","IProperty","IRes"]
+2025-01-05 17:17:13.959 +08:00 [INF] sheetData: {"sheetKeys":["number"],"sheetData":[{"id":0,"parentIds":[],"lvCap":0,"property":{"type":0,"id":10,"value":5},"cost":{"type":0,"id":101,"count":1}},{"id":1,"parentIds":[0],"lvCap":1,"property":{"type":2,"id":0,"value":2},"cost":{"type":0,"id":101,"count":2}},{"id":2,"parentIds":[0],"lvCap":4,"property":{"type":2,"id":1,"value":3},"cost":{"type":0,"id":101,"count":3}},{"id":3,"parentIds":[0],"lvCap":9,"property":{"type":0,"id":16,"value":5},"cost":{"type":0,"id":101,"count":4}},{"id":4,"parentIds":[1],"lvCap":16,"property":{"type":2,"id":2,"value":2},"cost":{"type":0,"id":101,"count":5}},{"id":5,"parentIds":[2],"lvCap":25,"property":{"type":0,"id":4,"value":2},"cost":{"type":0,"id":101,"count":6}},{"id":6,"parentIds":[3],"lvCap":36,"property":{"type":0,"id":15,"value":3},"cost":{"type":0,"id":101,"count":7}},{"id":7,"parentIds":[4,5,6],"lvCap":49,"property":{"type":0,"id":12,"value":5},"cost":{"type":0,"id":101,"count":8}},{"id":8,"parentIds":[7],"lvCap":64,"property":{"type":0,"id":19,"value":20},"cost":{"type":0,"id":101,"count":9}},{"id":9,"parentIds":[7],"lvCap":81,"property":{"type":0,"id":18,"value":20},"cost":{"type":0,"id":101,"count":10}},{"id":10,"parentIds":[8],"lvCap":100,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":11}},{"id":11,"parentIds":[9],"lvCap":121,"property":{"type":0,"id":17,"value":3},"cost":{"type":0,"id":101,"count":12}},{"id":12,"parentIds":[10,11],"lvCap":144,"property":{"type":0,"id":12,"value":5},"cost":{"type":0,"id":101,"count":13}},{"id":13,"parentIds":[12],"lvCap":169,"property":{"type":2,"id":0,"value":3},"cost":{"type":0,"id":101,"count":14}},{"id":14,"parentIds":[12],"lvCap":196,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":15}},{"id":15,"parentIds":[12],"lvCap":225,"property":{"type":0,"id":19,"value":40},"cost":{"type":0,"id":101,"count":16}},{"id":16,"parentIds":[13],"lvCap":256,"property":{"type":2,"id":2,"value":3},"cost":{"type":0,"id":101,"count":17}},{"id":17,"parentIds":[14],"lvCap":289,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":18}},{"id":18,"parentIds":[15],"lvCap":324,"property":{"type":0,"id":17,"value":10},"cost":{"type":0,"id":101,"count":19}},{"id":19,"parentIds":[16,17],"lvCap":361,"property":{"type":0,"id":9,"value":10},"cost":{"type":0,"id":101,"count":20}},{"id":20,"parentIds":[17,18],"lvCap":400,"property":{"type":0,"id":15,"value":10},"cost":{"type":0,"id":101,"count":21}},{"id":21,"parentIds":[19,20],"lvCap":441,"property":{"type":2,"id":3,"value":10},"cost":{"type":0,"id":101,"count":22}},{"id":22,"parentIds":[21],"lvCap":484,"property":{"type":2,"id":2,"value":10},"cost":{"type":0,"id":101,"count":23}},{"id":23,"parentIds":[21],"lvCap":529,"property":{"type":0,"id":8,"value":20},"cost":{"type":0,"id":101,"count":24}},{"id":24,"parentIds":[22,23],"lvCap":576,"property":{"type":0,"id":9,"value":100},"cost":{"type":0,"id":101,"count":25}},{"id":25,"parentIds":[24],"lvCap":625,"property":{"type":0,"id":10,"value":100},"cost":{"type":0,"id":101,"count":26}},{"id":26,"parentIds":[24],"lvCap":676,"property":{"type":0,"id":11,"value":100},"cost":{"type":0,"id":101,"count":27}},{"id":27,"parentIds":[24],"lvCap":729,"property":{"type":2,"id":0,"value":10},"cost":{"type":0,"id":101,"count":28}},{"id":28,"parentIds":[25],"lvCap":784,"property":{"type":0,"id":6,"value":100},"cost":{"type":0,"id":101,"count":29}},{"id":29,"parentIds":[26],"lvCap":841,"property":{"type":0,"id":19,"value":100},"cost":{"type":0,"id":101,"count":30}},{"id":30,"parentIds":[27],"lvCap":900,"property":{"type":2,"id":2,"value":10},"cost":{"type":0,"id":101,"count":31}},{"id":31,"parentIds":[28],"lvCap":961,"property":{"type":0,"id":6,"value":100},"cost":{"type":0,"id":101,"count":32}},{"id":32,"parentIds":[29],"lvCap":1024,"property":{"type":0,"id":15,"value":100},"cost":{"type":0,"id":101,"count":33}},{"id":33,"parentIds":[30],"lvCap":1089,"property":{"type":0,"id":4,"value":4},"cost":{"type":0,"id":101,"count":34}},{"id":34,"parentIds":[31,32,33],"lvCap":1156,"property":{"type":2,"id":3,"value":20},"cost":{"type":0,"id":101,"count":35}},{"id":35,"parentIds":[34],"lvCap":1225,"property":{"type":0,"id":10,"value":100},"cost":{"type":0,"id":101,"count":36}},{"id":36,"parentIds":[34],"lvCap":1296,"property":{"type":0,"id":11,"value":200},"cost":{"type":0,"id":101,"count":37}},{"id":37,"parentIds":[35,36],"lvCap":1369,"property":{"type":0,"id":9,"value":200},"cost":{"type":0,"id":101,"count":38}}]}
+2025-01-05 19:07:24.665 +08:00 [INF] 应用启动 "2025-01-05T19:07:24.6625811+08:00"
+2025-01-05 19:07:24.827 +08:00 [INF] 自定义类型 ["example","IProperty","IRes"]
+2025-01-05 19:07:25.315 +08:00 [INF] sheetData: {"sheetKeys":["number(id)"],"sheetData":[{"id":0,"parentIds":[],"lvCap":0,"property":{"type":0,"id":10,"value":5},"cost":{"type":0,"id":101,"count":1}},{"id":1,"parentIds":[0],"lvCap":1,"property":{"type":2,"id":0,"value":2},"cost":{"type":0,"id":101,"count":2}},{"id":2,"parentIds":[0],"lvCap":4,"property":{"type":2,"id":1,"value":3},"cost":{"type":0,"id":101,"count":3}},{"id":3,"parentIds":[0],"lvCap":9,"property":{"type":0,"id":16,"value":5},"cost":{"type":0,"id":101,"count":4}},{"id":4,"parentIds":[1],"lvCap":16,"property":{"type":2,"id":2,"value":2},"cost":{"type":0,"id":101,"count":5}},{"id":5,"parentIds":[2],"lvCap":25,"property":{"type":0,"id":4,"value":2},"cost":{"type":0,"id":101,"count":6}},{"id":6,"parentIds":[3],"lvCap":36,"property":{"type":0,"id":15,"value":3},"cost":{"type":0,"id":101,"count":7}},{"id":7,"parentIds":[4,5,6],"lvCap":49,"property":{"type":0,"id":12,"value":5},"cost":{"type":0,"id":101,"count":8}},{"id":8,"parentIds":[7],"lvCap":64,"property":{"type":0,"id":19,"value":20},"cost":{"type":0,"id":101,"count":9}},{"id":9,"parentIds":[7],"lvCap":81,"property":{"type":0,"id":18,"value":20},"cost":{"type":0,"id":101,"count":10}},{"id":10,"parentIds":[8],"lvCap":100,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":11}},{"id":11,"parentIds":[9],"lvCap":121,"property":{"type":0,"id":17,"value":3},"cost":{"type":0,"id":101,"count":12}},{"id":12,"parentIds":[10,11],"lvCap":144,"property":{"type":0,"id":12,"value":5},"cost":{"type":0,"id":101,"count":13}},{"id":13,"parentIds":[12],"lvCap":169,"property":{"type":2,"id":0,"value":3},"cost":{"type":0,"id":101,"count":14}},{"id":14,"parentIds":[12],"lvCap":196,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":15}},{"id":15,"parentIds":[12],"lvCap":225,"property":{"type":0,"id":19,"value":40},"cost":{"type":0,"id":101,"count":16}},{"id":16,"parentIds":[13],"lvCap":256,"property":{"type":2,"id":2,"value":3},"cost":{"type":0,"id":101,"count":17}},{"id":17,"parentIds":[14],"lvCap":289,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":18}},{"id":18,"parentIds":[15],"lvCap":324,"property":{"type":0,"id":17,"value":10},"cost":{"type":0,"id":101,"count":19}},{"id":19,"parentIds":[16,17],"lvCap":361,"property":{"type":0,"id":9,"value":10},"cost":{"type":0,"id":101,"count":20}},{"id":20,"parentIds":[17,18],"lvCap":400,"property":{"type":0,"id":15,"value":10},"cost":{"type":0,"id":101,"count":21}},{"id":21,"parentIds":[19,20],"lvCap":441,"property":{"type":2,"id":3,"value":10},"cost":{"type":0,"id":101,"count":22}},{"id":22,"parentIds":[21],"lvCap":484,"property":{"type":2,"id":2,"value":10},"cost":{"type":0,"id":101,"count":23}},{"id":23,"parentIds":[21],"lvCap":529,"property":{"type":0,"id":8,"value":20},"cost":{"type":0,"id":101,"count":24}},{"id":24,"parentIds":[22,23],"lvCap":576,"property":{"type":0,"id":9,"value":100},"cost":{"type":0,"id":101,"count":25}},{"id":25,"parentIds":[24],"lvCap":625,"property":{"type":0,"id":10,"value":100},"cost":{"type":0,"id":101,"count":26}},{"id":26,"parentIds":[24],"lvCap":676,"property":{"type":0,"id":11,"value":100},"cost":{"type":0,"id":101,"count":27}},{"id":27,"parentIds":[24],"lvCap":729,"property":{"type":2,"id":0,"value":10},"cost":{"type":0,"id":101,"count":28}},{"id":28,"parentIds":[25],"lvCap":784,"property":{"type":0,"id":6,"value":100},"cost":{"type":0,"id":101,"count":29}},{"id":29,"parentIds":[26],"lvCap":841,"property":{"type":0,"id":19,"value":100},"cost":{"type":0,"id":101,"count":30}},{"id":30,"parentIds":[27],"lvCap":900,"property":{"type":2,"id":2,"value":10},"cost":{"type":0,"id":101,"count":31}},{"id":31,"parentIds":[28],"lvCap":961,"property":{"type":0,"id":6,"value":100},"cost":{"type":0,"id":101,"count":32}},{"id":32,"parentIds":[29],"lvCap":1024,"property":{"type":0,"id":15,"value":100},"cost":{"type":0,"id":101,"count":33}},{"id":33,"parentIds":[30],"lvCap":1089,"property":{"type":0,"id":4,"value":4},"cost":{"type":0,"id":101,"count":34}},{"id":34,"parentIds":[31,32,33],"lvCap":1156,"property":{"type":2,"id":3,"value":20},"cost":{"type":0,"id":101,"count":35}},{"id":35,"parentIds":[34],"lvCap":1225,"property":{"type":0,"id":10,"value":100},"cost":{"type":0,"id":101,"count":36}},{"id":36,"parentIds":[34],"lvCap":1296,"property":{"type":0,"id":11,"value":200},"cost":{"type":0,"id":101,"count":37}},{"id":37,"parentIds":[35,36],"lvCap":1369,"property":{"type":0,"id":9,"value":200},"cost":{"type":0,"id":101,"count":38}}]}
+2025-01-05 19:09:04.521 +08:00 [INF] 应用启动 "2025-01-05T19:09:04.5179152+08:00"
+2025-01-05 19:09:04.682 +08:00 [INF] 自定义类型 ["example","IProperty","IRes"]
+2025-01-05 19:09:05.178 +08:00 [INF] sheetData: {"sheetKeys":["id"],"sheetData":[{"id":0,"parentIds":[],"lvCap":0,"property":{"type":0,"id":10,"value":5},"cost":{"type":0,"id":101,"count":1}},{"id":1,"parentIds":[0],"lvCap":1,"property":{"type":2,"id":0,"value":2},"cost":{"type":0,"id":101,"count":2}},{"id":2,"parentIds":[0],"lvCap":4,"property":{"type":2,"id":1,"value":3},"cost":{"type":0,"id":101,"count":3}},{"id":3,"parentIds":[0],"lvCap":9,"property":{"type":0,"id":16,"value":5},"cost":{"type":0,"id":101,"count":4}},{"id":4,"parentIds":[1],"lvCap":16,"property":{"type":2,"id":2,"value":2},"cost":{"type":0,"id":101,"count":5}},{"id":5,"parentIds":[2],"lvCap":25,"property":{"type":0,"id":4,"value":2},"cost":{"type":0,"id":101,"count":6}},{"id":6,"parentIds":[3],"lvCap":36,"property":{"type":0,"id":15,"value":3},"cost":{"type":0,"id":101,"count":7}},{"id":7,"parentIds":[4,5,6],"lvCap":49,"property":{"type":0,"id":12,"value":5},"cost":{"type":0,"id":101,"count":8}},{"id":8,"parentIds":[7],"lvCap":64,"property":{"type":0,"id":19,"value":20},"cost":{"type":0,"id":101,"count":9}},{"id":9,"parentIds":[7],"lvCap":81,"property":{"type":0,"id":18,"value":20},"cost":{"type":0,"id":101,"count":10}},{"id":10,"parentIds":[8],"lvCap":100,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":11}},{"id":11,"parentIds":[9],"lvCap":121,"property":{"type":0,"id":17,"value":3},"cost":{"type":0,"id":101,"count":12}},{"id":12,"parentIds":[10,11],"lvCap":144,"property":{"type":0,"id":12,"value":5},"cost":{"type":0,"id":101,"count":13}},{"id":13,"parentIds":[12],"lvCap":169,"property":{"type":2,"id":0,"value":3},"cost":{"type":0,"id":101,"count":14}},{"id":14,"parentIds":[12],"lvCap":196,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":15}},{"id":15,"parentIds":[12],"lvCap":225,"property":{"type":0,"id":19,"value":40},"cost":{"type":0,"id":101,"count":16}},{"id":16,"parentIds":[13],"lvCap":256,"property":{"type":2,"id":2,"value":3},"cost":{"type":0,"id":101,"count":17}},{"id":17,"parentIds":[14],"lvCap":289,"property":{"type":0,"id":6,"value":10},"cost":{"type":0,"id":101,"count":18}},{"id":18,"parentIds":[15],"lvCap":324,"property":{"type":0,"id":17,"value":10},"cost":{"type":0,"id":101,"count":19}},{"id":19,"parentIds":[16,17],"lvCap":361,"property":{"type":0,"id":9,"value":10},"cost":{"type":0,"id":101,"count":20}},{"id":20,"parentIds":[17,18],"lvCap":400,"property":{"type":0,"id":15,"value":10},"cost":{"type":0,"id":101,"count":21}},{"id":21,"parentIds":[19,20],"lvCap":441,"property":{"type":2,"id":3,"value":10},"cost":{"type":0,"id":101,"count":22}},{"id":22,"parentIds":[21],"lvCap":484,"property":{"type":2,"id":2,"value":10},"cost":{"type":0,"id":101,"count":23}},{"id":23,"parentIds":[21],"lvCap":529,"property":{"type":0,"id":8,"value":20},"cost":{"type":0,"id":101,"count":24}},{"id":24,"parentIds":[22,23],"lvCap":576,"property":{"type":0,"id":9,"value":100},"cost":{"type":0,"id":101,"count":25}},{"id":25,"parentIds":[24],"lvCap":625,"property":{"type":0,"id":10,"value":100},"cost":{"type":0,"id":101,"count":26}},{"id":26,"parentIds":[24],"lvCap":676,"property":{"type":0,"id":11,"value":100},"cost":{"type":0,"id":101,"count":27}},{"id":27,"parentIds":[24],"lvCap":729,"property":{"type":2,"id":0,"value":10},"cost":{"type":0,"id":101,"count":28}},{"id":28,"parentIds":[25],"lvCap":784,"property":{"type":0,"id":6,"value":100},"cost":{"type":0,"id":101,"count":29}},{"id":29,"parentIds":[26],"lvCap":841,"property":{"type":0,"id":19,"value":100},"cost":{"type":0,"id":101,"count":30}},{"id":30,"parentIds":[27],"lvCap":900,"property":{"type":2,"id":2,"value":10},"cost":{"type":0,"id":101,"count":31}},{"id":31,"parentIds":[28],"lvCap":961,"property":{"type":0,"id":6,"value":100},"cost":{"type":0,"id":101,"count":32}},{"id":32,"parentIds":[29],"lvCap":1024,"property":{"type":0,"id":15,"value":100},"cost":{"type":0,"id":101,"count":33}},{"id":33,"parentIds":[30],"lvCap":1089,"property":{"type":0,"id":4,"value":4},"cost":{"type":0,"id":101,"count":34}},{"id":34,"parentIds":[31,32,33],"lvCap":1156,"property":{"type":2,"id":3,"value":20},"cost":{"type":0,"id":101,"count":35}},{"id":35,"parentIds":[34],"lvCap":1225,"property":{"type":0,"id":10,"value":100},"cost":{"type":0,"id":101,"count":36}},{"id":36,"parentIds":[34],"lvCap":1296,"property":{"type":0,"id":11,"value":200},"cost":{"type":0,"id":101,"count":37}},{"id":37,"parentIds":[35,36],"lvCap":1369,"property":{"type":0,"id":9,"value":200},"cost":{"type":0,"id":101,"count":38}}]}

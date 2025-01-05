@@ -1,0 +1,57 @@
+﻿[
+    {
+        "name": "example",
+        "types": [
+            {
+                "name": "id",
+                "type": "number(id)"
+            },
+            {
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "name": "age",
+                "type": "number"
+            },
+            {
+                "name": "children",
+                "type": "array<number>"
+            }
+        ]
+    },
+    {
+        "name": "IProperty",
+        "types": [
+            {
+                "name": "type",
+                "type": "number"
+            },
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "value",
+                "type": "number"
+            }
+        ]
+    },
+    {
+        "name": "IRes",
+        "types": [
+            {
+                "name": "type",
+                "type": "number"
+            },
+            {
+                "name": "id",
+                "type": "number"
+            },
+            {
+                "name": "count",
+                "type": "number"
+            }
+        ]
+    }
+]
