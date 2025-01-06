@@ -1,0 +1,7 @@
+﻿{
+    "logger": "info",
+    
+    "excelRootPath": "F:/Project/Work/MGF/SlimeAssemble/Game_SlimeAssemble/SlimeAssemble/ExcelExporter",
+    "jsonExportPath": "",
+    "codeExportPath": ""
+}
