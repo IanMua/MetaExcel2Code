@@ -1,0 +1,278 @@
+﻿{
+    "appId": "cli_a7f1f06aa82ad00c",
+    "appSecret": "RapOj357SGrA8e3yCFq41dWErfduQ54c",
+    
+    "jsonExportPath": "D:/Work/SlimeEra/SlimeEra/SlimeEra_trunk/assets/data",
+    "jsonFileName": "db.json",
+    
+    "codeExportPath": "D:/Work/SlimeEra/SlimeEra/SlimeEra_trunk/assets/public/script/utils",
+    "codeFileName": "DBManager.ts",
+    
+    "cloudExcelUrls": [
+        {
+            "name": "副本",
+            "url": "Q8JpsHvu8hpDymtfw18ctCuzn2e"
+        },
+        {
+            "name": "基金",
+            "url": "U8tas7QyJhr2jqtsQKPcJt7qnpd"
+        },
+        {
+            "name": "签到",
+            "url": "TnchsuoAgh9yX1tI3sNc0bEonYg"
+        },
+        {
+            "name": "任务",
+            "url": "YPTZs70FQhcjHAtpxIWcQIu4n5d"
+        },
+        {
+            "name": "商店",
+            "url": "YoAQsvHYIhgLTAtJcEtcb79pnYb"
+        },
+        {
+            "name": "小游戏",
+            "url": "EakisOTUzhBirwtswLHcsoxnnrg"
+        },
+        {
+            "name": "章节",
+            "url": "KqLzsFkLdhLY0htFM3rcQZtcnfc"
+        },
+        {
+            "name": "召唤",
+            "url": "M2SFs8VXchVl5ct6PNucMrbQnhc"
+        },
+        {
+            "name": "功能解锁",
+            "url": "NQsXsZ2K8h8RvOto1KvcH7ctnKQ"
+        },
+        {
+            "name": "数据_常数",
+            "url": "ZIhZsEevghuw5GtCXy5cuaI8nn7"
+        },
+        {
+            "name": "数据_渠道参数",
+            "url": "CBNasarwMhZAQNtcxDSckGNPnbb"
+        },
+        {
+            "name": "数据_小游戏",
+            "url": "PFe7shrDqht58HtUrTEcVedInyd"
+        },
+        {
+            "name": "数据_文字",
+            "url": "HcaksivXChBsvrt7MfAcyYS9nNd"
+        },
+        {
+            "name": "数据_buff",
+            "url": "QGlDsvM52hY5TStudZYc3B6dntg"
+        },
+        {
+            "name": "数据_方块",
+            "url": "XXYSsIH6Dh9JrAtbbMMcHLFEntg"
+        },
+        {
+            "name": "数据_怪物",
+            "url": "PWOcsvBc3hzfYPtIxTfcIhw1n7f"
+        },
+        {
+            "name": "数据_计费点",
+            "url": "QR1RsFprrhV9BVtOFi3cUVMKnrd"
+        },
+        {
+            "name": "数据_属性",
+            "url": "PSnPsopGthltf7tDCDccTZCHnvd"
+        },
+        {
+            "name": "数据_技能",
+            "url": "Llcgs0bsBhBqestVH4XcyK8KnNh"
+        },
+        {
+            "name": "数据_子弹",
+            "url": "OloksEXjUhRUoJtZhbjc2UgDnge"
+        },
+        {
+            "name": "数据_战斗能力",
+            "url": "Uph7saoFUhpWQFt7E5UcjrvWnNg"
+        },
+        {
+            "name": "数据_掉落",
+            "url": "VD4Ns78AphmTgvtdgjBcdETtnNg"
+        },
+        {
+            "name": "资源_英雄",
+            "url": "MzKrsN1bvh9Ku1tNhPLcNAKqnJc"
+        },
+        {
+            "name": "资源_货币",
+            "url": "UsaNsCLdXhmGwktHmvKcpqZbnhf"
+        }
+    ],
+    
+    "typeList": [
+        {
+            "name": "IAdConfig",
+            "ann": "广告设定",
+            "types": [
+                {
+                    "name": "id",
+                    "type": "string"
+                },
+                {
+                    "name": "width",
+                    "type": "number"
+                },
+                {
+                    "name": "height",
+                    "type": "number"
+                },
+                {
+                    "name": "originX",
+                    "type": "number"
+                },
+                {
+                    "name": "originY",
+                    "type": "number"
+                },
+                {
+                    "name": "anchorX",
+                    "type": "number"
+                },
+                {
+                    "name": "anchorY",
+                    "type": "number"
+                },
+                {
+                    "name": "offsetX",
+                    "type": "number"
+                },
+                {
+                    "name": "offsetY",
+                    "type": "number"
+                },
+                {
+                    "name": "interval",
+                    "type": "number"
+                }
+            ]
+        },
+        {
+            "name": "IStyle",
+            "ann": "广告位置",
+            "types": [
+                {
+                    "name": "width",
+                    "type": "number"
+                },
+                {
+                    "name": "height",
+                    "type": "number"
+                },
+                {
+                    "name": "originX",
+                    "type": "number"
+                },
+                {
+                    "name": "originY",
+                    "type": "number"
+                },
+                {
+                    "name": "anchorX",
+                    "type": "number"
+                },
+                {
+                    "name": "anchorY",
+                    "type": "number"
+                },
+                {
+                    "name": "offsetX",
+                    "type": "number"
+                },
+                {
+                    "name": "offsetY",
+                    "type": "number"
+                }
+            ]
+        },
+        {
+            "name": "IRecord",
+            "ann": "录屏设定",
+            "types": [
+                {
+                    "name": "title",
+                    "type": "string"
+                },
+                {
+                    "name": "topic",
+                    "type": "Array<string>"
+                }
+            ]
+        },
+        {
+            "name": "IProperty",
+            "ann": "属性",
+            "types": [
+                {
+                    "name": "type",
+                    "type": "number"
+                },
+                {
+                    "name": "id",
+                    "type": "number"
+                },
+                {
+                    "name": "value",
+                    "type": "number"
+                }
+            ]
+        },
+        {
+            "name": "IRes",
+            "ann": "资源",
+            "types": [
+                {
+                    "name": "type",
+                    "type": "number"
+                },
+                {
+                    "name": "id",
+                    "type": "number"
+                },
+                {
+                    "name": "count",
+                    "type": "number"
+                }
+            ]
+        },
+        {
+            "name": "HeroProperty",
+            "ann": "英雄属性",
+            "types": [
+                {
+                    "name": "property",
+                    "type": "IProperty"
+                },
+                {
+                    "name": "formal",
+                    "type": "number"
+                },
+                {
+                    "name": "value",
+                    "type": "number"
+                }
+            ]
+        },
+        {
+            "name": "IChapterChest",
+            "ann": "章节宝箱",
+            "types": [
+                {
+                    "name": "rank",
+                    "type": "number"
+                },
+                {
+                    "name": "res",
+                    "type": "Array<IRes>"
+                }
+            ]
+        }
+    ]
+}

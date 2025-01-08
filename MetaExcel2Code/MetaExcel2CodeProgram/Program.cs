@@ -13,7 +13,7 @@ public abstract class Program
 
     private static AppConfig _appConfig = null!;
 
-    private static Dictionary<string, TypeConfig> typeConfigDict = new();
+    private static readonly Dictionary<string, TypeConfig> TypeConfigDict = new();
 
     public static void Main(string[] args)
     {
@@ -111,11 +111,11 @@ public abstract class Program
                 {
                     foreach (TypeConfig typeConfig in typeConfigs)
                     {
-                        typeConfigDict.Add(typeConfig.name, typeConfig);
+                        TypeConfigDict.Add(typeConfig.name, typeConfig);
                     }
                 }
 
-                Log.Information("自定义类型 {Value}", JsonConvert.SerializeObject(typeConfigDict.Keys));
+                Log.Information("自定义类型 {Value}", JsonConvert.SerializeObject(TypeConfigDict.Keys));
             }
             catch (Exception)
             {
@@ -123,7 +123,7 @@ public abstract class Program
             }
         }
 
-        LoadWorkSpace();
+        WorkSpacePipe();
     }
 
     private static void Test()
@@ -137,20 +137,25 @@ public abstract class Program
         Log.Information("sheetData: {Value}", JsonConvert.SerializeObject(sheetData));
     }
 
-    /** 加载工作空间 */
-    private static void LoadWorkSpace()
+    /** 工作空间流 */
+    private static void WorkSpacePipe()
     {
         string?[] directories = Directory.GetDirectories(_appConfig.excelRootPath);
         if (directories == null || directories.Length == 0) throw new Exception("工作空间为空，请先创建工作空间");
     }
 
-    public static bool isCustomType(string type)
+    private static void LoadWorkSpace(string workSpacePath)
     {
-        return typeConfigDict.ContainsKey(type);
+        if (!Directory.Exists(workSpacePath)) throw new Exception($"{workSpacePath} 工作空间不存在");
     }
 
-    public static TypeConfig getCustomType(string type)
+    public static bool IsCustomType(string type)
     {
-        return typeConfigDict[type];
+        return TypeConfigDict.ContainsKey(type);
+    }
+
+    public static TypeConfig GetCustomType(string type)
+    {
+        return TypeConfigDict[type];
     }
 }

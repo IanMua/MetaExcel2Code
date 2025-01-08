@@ -38,14 +38,14 @@ public static class CellParser
             throw new Exception($"{value} 不是 array 类型");
         }
 
-        if (Program.isCustomType(typeStruct.type))
+        if (Program.IsCustomType(typeStruct.type))
         {
             if (value.StartsWith('{') & value.EndsWith('}'))
             {
                 string inner = value.Substring(1, value.Length - 2);
                 string[] parts = inner.Split(';', StringSplitOptions.RemoveEmptyEntries);
 
-                TypeConfig typeConfig = Program.getCustomType(typeStruct.type);
+                TypeConfig typeConfig = Program.GetCustomType(typeStruct.type);
                 if (typeConfig.types.Count != parts.Length)
                     throw new Exception($"{value} 的长度与 {typeStruct.type} 类型的类型长度不一致");
 
