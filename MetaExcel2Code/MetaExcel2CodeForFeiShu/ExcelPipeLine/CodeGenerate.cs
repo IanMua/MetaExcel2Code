@@ -42,9 +42,8 @@ public static class CodeGenerate
         foreach (var (sheetName, sheetFullStruct) in allSheets)
         {
             List<string> paramTypes = [];
-            for (var i = 0; i < sheetFullStruct.sheetStruct.sheetKeys.Count; i++)
+            foreach (var sheetKey in sheetFullStruct.sheetStruct.sheetKeys)
             {
-                string sheetKey = sheetFullStruct.sheetStruct.sheetKeys[i];
                 int index = sheetFullStruct.fields.IndexOf(sheetKey);
                 if (index == -1) throw new Exception($"{sheetName} 表中没有发现 {sheetKey}");
                 string type = sheetFullStruct.types[index];
@@ -148,6 +147,16 @@ public static class CodeGenerate
             sb.AppendLine("}");
             sb.AppendLine();
         }
+        
+        sb.AppendLine("// ==================== 数据表字面量枚举 ====================");
+        sb.AppendLine();
+
+        sb.AppendLine("export const enum DBManagerEnum {");
+        foreach (var (sheetName, _) in allSheets)
+        {
+            sb.AppendLine($"    {sheetName} = \"{sheetName}\",");
+        }
+        sb.AppendLine("}");
 
         return sb.ToString();
     }

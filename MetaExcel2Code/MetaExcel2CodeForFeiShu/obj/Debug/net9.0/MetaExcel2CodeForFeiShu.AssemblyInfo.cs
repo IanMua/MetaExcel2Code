@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MetaExcel2CodeForFeiShu")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17df979d0c977f1caaf7d60713b824e7438a03b2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78f83cc2ed1ea8564b531264758525d94c61696d")]
 [assembly: System.Reflection.AssemblyProductAttribute("MetaExcel2CodeForFeiShu")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MetaExcel2CodeForFeiShu")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
