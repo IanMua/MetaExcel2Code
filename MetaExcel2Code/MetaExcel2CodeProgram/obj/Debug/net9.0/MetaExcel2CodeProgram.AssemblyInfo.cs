@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MetaExcel2CodeProgram")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78f83cc2ed1ea8564b531264758525d94c61696d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+691924e809b9835367d41af5926ee9b03511f3cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("MetaExcel2CodeProgram")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MetaExcel2CodeProgram")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

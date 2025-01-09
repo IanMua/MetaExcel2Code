@@ -19,12 +19,12 @@ public static class CodeGenerate
         sb.AppendLine("export class DBManager {");
 
         // 存储
-        sb.AppendLine("    private static dbMap: Map<number | string, Map<number | string, any>> = new Map();");
+        sb.AppendLine("    private static dbMap: Map<string, Map<number | string, any>> = new Map();");
         sb.AppendLine();
 
         sb.AppendLine("    // 获取数据库");
         sb.AppendLine(
-            "    public static getDB(dbName: string): Map<number | string, any> | undefined {");
+            "    public static getDB<K extends keyof DBManagerTypeMapping>(dbName: K): Map<number | string, DBManagerTypeMapping[K]> | undefined {");
         sb.AppendLine("        return this.dbMap.get(dbName);");
         sb.AppendLine("    }");
         sb.AppendLine();
@@ -147,6 +147,17 @@ public static class CodeGenerate
             sb.AppendLine("}");
             sb.AppendLine();
         }
+        
+        sb.AppendLine("// ==================== 数据表类型映射 ====================");
+        sb.AppendLine();
+
+        sb.AppendLine("export type DBManagerTypeMapping = {");
+        foreach (var (sheetName, _) in allSheets)
+        {
+            sb.AppendLine($"    {sheetName}: {sheetName}");
+        }
+        sb.AppendLine("}");
+        sb.AppendLine();
         
         sb.AppendLine("// ==================== 数据表字面量枚举 ====================");
         sb.AppendLine();
