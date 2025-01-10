@@ -1,4 +1,5 @@
-﻿using MetaExcel2CodeForFeiShu.ExcelPipeLine;
+﻿using System.Net;
+using MetaExcel2CodeForFeiShu.ExcelPipeLine;
 using MetaExcel2CodeForFeiShu.Models;
 using MetaExcel2CodeForFeiShu.Resp;
 using MetaExcel2CodeForFeiShu.Tools;
@@ -55,7 +56,7 @@ internal abstract class Program
         {
             if (_success) Log.Information("文件导出成功！");
             else Log.Error("文件导出失败");
-            
+
             await Log.CloseAndFlushAsync();
 
             Console.ReadKey();
@@ -148,58 +149,100 @@ internal abstract class Program
         Log.Information("==============================");
         Log.Information("开始获取云Excel数据");
 
-        List<GetCloudExcelDataResp> cloudExcelDataRespList = [];
+        var client = new RestClient("https://open.feishu.cn/open-apis/sheets/v3/spreadsheets");
+
+        var tasks = new List<Task<GetCloudExcelResp>>();
+        
+        var semaphore = new SemaphoreSlim(3);
 
         foreach (CloudExcelUrl cloudExcelUrl in AppConfigs.cloudExcelUrls!)
         {
-            Log.Information($"获取云数据表 {cloudExcelUrl.name} 电子表格信息");
-
-            var client = new RestClient("https://open.feishu.cn/open-apis/sheets/v3/spreadsheets");
-
-            var request = new RestRequest(cloudExcelUrl.url + "/sheets/query");
-            request.AddHeader("Authorization", "Bearer " + _tenantAccessToken);
-
-            var response = await client.ExecuteAsync(request);
-
-            if (response is { IsSuccessful: true, Content: not null })
+            tasks.Add(Task.Run(async () =>
             {
-                GetCloudExcelResp? cloudExcelResp;
+                await semaphore.WaitAsync();
+
                 try
                 {
-                    cloudExcelResp = JsonConvert.DeserializeObject<GetCloudExcelResp>(response.Content);
-                }
-                catch (Exception ex)
-                {
-                    Log.Error($"响应：{response.Content}");
-                    Log.Error(ex.Message);
-                    throw new Exception($"{cloudExcelUrl.name} 数据表反序列化失败");
-                }
+                    Log.Information($"获取云数据表 {cloudExcelUrl.name} 电子表格信息");
 
-                if (cloudExcelResp is null)
-                {
-                    Log.Error($"响应：{response.Content}");
-                    throw new Exception($"{cloudExcelUrl.name} 数据表反序列化失败");
-                }
+                    var request = new RestRequest(cloudExcelUrl.url + "/sheets/query");
+                    request.AddHeader("Authorization", "Bearer " + _tenantAccessToken);
 
-                cloudExcelDataRespList.Add(cloudExcelResp.data);
-            }
-            else
-            {
-                Log.Error($"StatusCode: {response.StatusCode}");
-                Log.Error($"Content: {response.Content}");
-                Log.Error($"ErrorMessage: {response.ErrorMessage}");
-                throw new Exception($"{cloudExcelUrl.name} 数据获取失败");
-            }
+                    while (true)
+                    {
+                        var response = await client.ExecuteAsync(request);
+
+                        if (response.StatusCode == HttpStatusCode.TooManyRequests)
+                        {
+                            await Task.Delay(300);
+                            continue;
+                        }
+
+                        if (response is { IsSuccessful: true, Content: not null })
+                        {
+                            GetCloudExcelResp? cloudExcelResp;
+                            try
+                            {
+                                cloudExcelResp = JsonConvert.DeserializeObject<GetCloudExcelResp>(response.Content);
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.Error($"响应：{response.Content}");
+                                Log.Error(ex.Message);
+                                throw new Exception($"{cloudExcelUrl.name} 数据表反序列化失败");
+                            }
+
+                            if (cloudExcelResp is null)
+                            {
+                                Log.Error($"响应：{response.Content}");
+                                throw new Exception($"{cloudExcelUrl.name} 数据表反序列化失败");
+                            }
+
+                            return cloudExcelResp;
+                        }
+
+                        Log.Error($"StatusCode: {response.StatusCode}");
+                        Log.Error($"Content: {response.Content}");
+                        Log.Error($"ErrorMessage: {response.ErrorMessage}");
+                        throw new Exception($"{cloudExcelUrl.name} 数据获取失败");
+                    }
+                }
+                finally
+                {
+                    semaphore.Release();
+                }
+            }));
         }
+
+        var cloudExcelDataRespList = new List<GetCloudExcelResp>(await Task.WhenAll(tasks));
 
         Log.Information("==============================");
 
         List<CloudExcelSheetData> cloudExcelSheetDataList = [];
 
+        var cellTasks = new List<Task<List<CloudExcelSheetData>>>();
+
         for (var i = 0; i < cloudExcelDataRespList.Count; i++)
         {
-            cloudExcelSheetDataList.AddRange(await GetCloudExcelCellData(cloudExcelDataRespList[i],
-                AppConfigs.cloudExcelUrls[i]));
+            var i1 = i;
+            cellTasks.Add(Task.Run(async () =>
+            {
+                await semaphore.WaitAsync();
+                try
+                {
+                    return await GetCloudExcelCellData(cloudExcelDataRespList[i1].data, AppConfigs.cloudExcelUrls[i1]);
+                }
+                finally
+                {
+                    semaphore.Release();
+                }
+            }));
+        }
+
+        var cellResult = await Task.WhenAll(cellTasks);
+        foreach (var cellResultItem in cellResult)
+        {
+            cloudExcelSheetDataList.AddRange(cellResultItem);
         }
 
         return cloudExcelSheetDataList;
@@ -227,27 +270,34 @@ internal abstract class Program
         request.AddQueryParameter("valueRenderOption", "FormattedValue");
         request.AddQueryParameter("dateTimeRenderOption", "FormattedString");
 
-        var response = await client.ExecuteAsync(request);
-
-        if (response is { IsSuccessful: true, Content: not null })
+        while (true)
         {
-            JObject jsonObj = JObject.Parse(response.Content);
+            var response = await client.ExecuteAsync(request);
 
-            GetCloudExcelCellDataResp cloudExcelCellDataResp =
-                jsonObj["data"]?.ToObject<GetCloudExcelCellDataResp>() ??
-                throw new Exception($"{cloudExcelUrl.name} 解析数据为空");
-
-            List<CloudExcelSheetData> cloudExcelSheetDataList = [];
-            for (var i = 0; i < cloudExcelCellDataResp.valueRanges.Count; i++)
+            if (response.StatusCode == HttpStatusCode.TooManyRequests)
             {
-                cloudExcelSheetDataList.Add(new CloudExcelSheetData(cloudExcelDataResp.sheets[i].title,
-                    cloudExcelCellDataResp.valueRanges[i].values));
+                await Task.Delay(300);
+                continue;
             }
 
-            return cloudExcelSheetDataList;
-        }
-        else
-        {
+            if (response is { IsSuccessful: true, Content: not null })
+            {
+                JObject jsonObj = JObject.Parse(response.Content);
+
+                GetCloudExcelCellDataResp cloudExcelCellDataResp =
+                    jsonObj["data"]?.ToObject<GetCloudExcelCellDataResp>() ??
+                    throw new Exception($"{cloudExcelUrl.name} 解析数据为空");
+
+                List<CloudExcelSheetData> cloudExcelSheetDataList = [];
+                for (var i = 0; i < cloudExcelCellDataResp.valueRanges.Count; i++)
+                {
+                    cloudExcelSheetDataList.Add(new CloudExcelSheetData(cloudExcelDataResp.sheets[i].title,
+                        cloudExcelCellDataResp.valueRanges[i].values));
+                }
+
+                return cloudExcelSheetDataList;
+            }
+
             Log.Error($"StatusCode: {response.StatusCode}");
             Log.Error($"Content: {response.Content}");
             Log.Error($"ErrorMessage: {response.ErrorMessage}");

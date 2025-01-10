@@ -5,6 +5,8 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Version>1.1.0</Version>
+        <AssemblyName>me2c</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,5 +18,9 @@
       <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
       <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
     </ItemGroup>
+
+    <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+        <AssemblyName>me2c_$(RuntimeIdentifier)_v$(Version)</AssemblyName>
+    </PropertyGroup>
 
 </Project>

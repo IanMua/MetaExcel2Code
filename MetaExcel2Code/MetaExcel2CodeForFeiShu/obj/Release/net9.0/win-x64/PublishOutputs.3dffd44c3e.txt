@@ -1,2 +1,2 @@
-D:\Project\MetaExcel2Code\MetaExcel2Code\MetaExcel2CodeForFeiShu\bin\Release\net9.0\win-x64\publish\MetaExcel2CodeForFeiShu.pdb
-D:\Project\MetaExcel2Code\MetaExcel2Code\MetaExcel2CodeForFeiShu\bin\Release\net9.0\win-x64\publish\MetaExcel2CodeForFeiShu.exe
+D:\Project\MetaExcel2Code\MetaExcel2Code\MetaExcel2CodeForFeiShu\bin\Release\net9.0\win-x64\publish\me2c_win-x64_v1.1.0.pdb
+D:\Project\MetaExcel2Code\MetaExcel2Code\MetaExcel2CodeForFeiShu\bin\Release\net9.0\win-x64\publish\me2c_win-x64_v1.1.0.exe

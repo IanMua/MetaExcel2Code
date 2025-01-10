@@ -5,10 +5,10 @@
   },
   "projects": {
     "D:\\Project\\MetaExcel2Code\\MetaExcel2Code\\MetaExcel2CodeForFeiShu\\MetaExcel2CodeForFeiShu.csproj": {
-      "version": "1.0.0",
+      "version": "1.1.0",
       "restore": {
         "projectUniqueName": "D:\\Project\\MetaExcel2Code\\MetaExcel2Code\\MetaExcel2CodeForFeiShu\\MetaExcel2CodeForFeiShu.csproj",
-        "projectName": "MetaExcel2CodeForFeiShu",
+        "projectName": "me2c_win-x86_v1.1.0",
         "projectPath": "D:\\Project\\MetaExcel2Code\\MetaExcel2Code\\MetaExcel2CodeForFeiShu\\MetaExcel2CodeForFeiShu.csproj",
         "packagesPath": "C:\\Users\\darre\\.nuget\\packages\\",
         "outputPath": "D:\\Project\\MetaExcel2Code\\MetaExcel2Code\\MetaExcel2CodeForFeiShu\\obj\\",
@@ -92,15 +92,15 @@
           "warn": true,
           "downloadDependencies": [
             {
-              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
               "version": "[9.0.0, 9.0.0]"
             },
             {
-              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "name": "Microsoft.NETCore.App.Runtime.win-x86",
               "version": "[9.0.0, 9.0.0]"
             },
             {
-              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
               "version": "[9.0.0, 9.0.0]"
             }
           ],
@@ -113,7 +113,7 @@
         }
       },
       "runtimes": {
-        "win-x64": {
+        "win-x86": {
           "#import": []
         }
       }

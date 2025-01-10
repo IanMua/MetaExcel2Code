@@ -1,0 +1,2 @@
+D:\Project\MetaExcel2Code\MetaExcel2Code\MetaExcel2CodeForFeiShu\publish\win-x86publish\me2c.pdb
+D:\Project\MetaExcel2Code\MetaExcel2Code\MetaExcel2CodeForFeiShu\publish\win-x86publish\me2c.exe
