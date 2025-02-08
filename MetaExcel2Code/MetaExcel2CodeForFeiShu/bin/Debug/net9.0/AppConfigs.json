@@ -1,112 +1,128 @@
 ﻿{
     "appId": "cli_a7f1f06aa82ad00c",
     "appSecret": "RapOj357SGrA8e3yCFq41dWErfduQ54c",
-    
-    "jsonExportPath": "D:/Work/SlimeEra/SlimeEra/SlimeEra_trunk/assets/data",
+    "jsonExportPath": "../assets/data/",
     "jsonFileName": "db.json",
-    
-    "codeExportPath": "D:/Work/SlimeEra/SlimeEra/SlimeEra_trunk/assets/public/script/utils",
+    "codeExportPath": "../assets/public/script/utils/",
     "codeFileName": "DBManager.ts",
-    
     "cloudExcelUrls": [
         {
+            "name": "常数",
+            "url": "Iu3OsIts7hszumtLuvicTAIwnbd"
+        },
+        {
+            "name": "渠道参数",
+            "url": "K5yWsvbwzhoG2dtt7etcAt3PnPn"
+        },
+        {
+            "name": "Buff",
+            "url": "W2q0sCQsHhA6E9tKLQAcwVuunuf"
+        },
+        {
+            "name": "成长",
+            "url": "ZEPtsX8FNh71Qjt8N8kci1v1n8g"
+        },
+        {
+            "name": "雕像",
+            "url": "BucsseOvohGkqTtftNlcnijgnVd"
+        },
+        {
             "name": "副本",
-            "url": "Q8JpsHvu8hpDymtfw18ctCuzn2e"
-        },
-        {
-            "name": "基金",
-            "url": "U8tas7QyJhr2jqtsQKPcJt7qnpd"
-        },
-        {
-            "name": "签到",
-            "url": "TnchsuoAgh9yX1tI3sNc0bEonYg"
-        },
-        {
-            "name": "任务",
-            "url": "YPTZs70FQhcjHAtpxIWcQIu4n5d"
-        },
-        {
-            "name": "商店",
-            "url": "YoAQsvHYIhgLTAtJcEtcb79pnYb"
-        },
-        {
-            "name": "小游戏",
-            "url": "EakisOTUzhBirwtswLHcsoxnnrg"
-        },
-        {
-            "name": "章节",
-            "url": "KqLzsFkLdhLY0htFM3rcQZtcnfc"
-        },
-        {
-            "name": "召唤",
-            "url": "M2SFs8VXchVl5ct6PNucMrbQnhc"
+            "url": "CY4ZsxRRxh9Zsrt30sZc21crnhe"
         },
         {
             "name": "功能解锁",
-            "url": "NQsXsZ2K8h8RvOto1KvcH7ctnKQ"
+            "url": "QJXdsZDv9hU56Wte9Q4cRrBQnoe"
         },
         {
-            "name": "数据_常数",
-            "url": "ZIhZsEevghuw5GtCXy5cuaI8nn7"
+            "name": "怪物",
+            "url": "TpBwsxpsThdvcRtbotqcQ6E3n6e"
         },
         {
-            "name": "数据_渠道参数",
-            "url": "CBNasarwMhZAQNtcxDSckGNPnbb"
+            "name": "关卡",
+            "url": "KP9LsPnrOhDKA0tTmWWcJCY5nvb"
         },
         {
-            "name": "数据_小游戏",
-            "url": "PFe7shrDqht58HtUrTEcVedInyd"
+            "name": "计费点",
+            "url": "AOiJs4gelhzZJQtGrURcaxNdn9c"
         },
         {
-            "name": "数据_文字",
-            "url": "HcaksivXChBsvrt7MfAcyYS9nNd"
+            "name": "建筑",
+            "url": "YoEbsjNb7hWe9atVlvicB2wSnoc"
         },
         {
-            "name": "数据_buff",
-            "url": "QGlDsvM52hY5TStudZYc3B6dntg"
+            "name": "区间公式",
+            "url": "G0VFsgUaOhGP6KtTNdocGSeUnSh"
         },
         {
-            "name": "数据_方块",
-            "url": "XXYSsIH6Dh9JrAtbbMMcHLFEntg"
+            "name": "任务",
+            "url": "LwwLsiUpyhnvUDtbXWdc19LyntY"
         },
         {
-            "name": "数据_怪物",
-            "url": "PWOcsvBc3hzfYPtIxTfcIhw1n7f"
+            "name": "商店",
+            "url": "KU52sISWbhMZXLtguL1cKETLnc8"
         },
         {
-            "name": "数据_计费点",
-            "url": "QR1RsFprrhV9BVtOFi3cUVMKnrd"
+            "name": "属性",
+            "url": "P0FRsPSeJh4MLrtceuycH1CWnUh"
         },
         {
-            "name": "数据_属性",
-            "url": "PSnPsopGthltf7tDCDccTZCHnvd"
+            "name": "天赋",
+            "url": "Ps10sgz6chMbgwtCJWOcisq4nNh"
         },
         {
-            "name": "数据_技能",
-            "url": "Llcgs0bsBhBqestVH4XcyK8KnNh"
+            "name": "通行证",
+            "url": "BEEps1Wk9hzUY8ts1Hoc2iQFnMe"
         },
         {
-            "name": "数据_子弹",
-            "url": "OloksEXjUhRUoJtZhbjc2UgDnge"
+            "name": "图鉴-英雄",
+            "url": "J55rsCcgZhvj0xt5DsMcqC6knMc"
         },
         {
-            "name": "数据_战斗能力",
-            "url": "Uph7saoFUhpWQFt7E5UcjrvWnNg"
+            "name": "印记",
+            "url": "PxAnsCpoZhNIDSt4FWVcr2FLnsf"
         },
         {
-            "name": "数据_掉落",
-            "url": "VD4Ns78AphmTgvtdgjBcdETtnNg"
+            "name": "英雄-技能",
+            "url": "DfeRsjFiBhZ4tPtQMYZcRBfmnud"
         },
         {
-            "name": "资源_英雄",
-            "url": "MzKrsN1bvh9Ku1tNhPLcNAKqnJc"
+            "name": "英雄-数据",
+            "url": "MpGDscpnnhxpMxtucQVcCj9NnLf"
         },
         {
-            "name": "资源_货币",
-            "url": "UsaNsCLdXhmGwktHmvKcpqZbnhf"
+            "name": "英雄-子弹",
+            "url": "WUunsv69jh3hsVtInwJcxk4lnDd"
+        },
+        {
+            "name": "召唤",
+            "url": "PUq8sahmDhTXnSt0Iu4cs9RYn2g"
+        },
+        {
+            "name": "祝福",
+            "url": "DmIyscnNchiCvMt2lMNcfg8Fnyb"
+        },
+        {
+            "name": "装备",
+            "url": "UeRvsPgvZh4LRjtMhKcc1FTknJc"
+        },
+        {
+            "name": "掉落",
+            "url": "M0TksIXDBhzPHztcazgc6yz3n9d"
+        },
+        {
+            "name": "货币",
+            "url": "YA89s35vxhzhNytxt0CcsTW5nlk"
+        },
+        {
+            "name": "英雄",
+            "url": "PBlfsqd8mhlNyatLsMic02bZnKg"
+        },
+        {
+            "name": "文字",
+            "url": "HBPWs8XaYhyL3jtbypyc7u1Fnrg"
         }
     ],
-    
     "typeList": [
         {
             "name": "IAdConfig",
@@ -239,38 +255,6 @@
                 {
                     "name": "count",
                     "type": "number"
-                }
-            ]
-        },
-        {
-            "name": "HeroProperty",
-            "ann": "英雄属性",
-            "types": [
-                {
-                    "name": "property",
-                    "type": "IProperty"
-                },
-                {
-                    "name": "formal",
-                    "type": "number"
-                },
-                {
-                    "name": "value",
-                    "type": "number"
-                }
-            ]
-        },
-        {
-            "name": "IChapterChest",
-            "ann": "章节宝箱",
-            "types": [
-                {
-                    "name": "rank",
-                    "type": "number"
-                },
-                {
-                    "name": "res",
-                    "type": "Array<IRes>"
                 }
             ]
         }

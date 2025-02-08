@@ -1061,10 +1061,10 @@
     "C:\\Users\\darre\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "2.1.2",
     "restore": {
       "projectUniqueName": "D:\\Project\\MetaExcel2Code\\MetaExcel2Code\\MetaExcel2CodeProgram\\MetaExcel2CodeProgram.csproj",
-      "projectName": "MetaExcel2CodeProgram",
+      "projectName": "me2c-local",
       "projectPath": "D:\\Project\\MetaExcel2Code\\MetaExcel2Code\\MetaExcel2CodeProgram\\MetaExcel2CodeProgram.csproj",
       "packagesPath": "C:\\Users\\darre\\.nuget\\packages\\",
       "outputPath": "D:\\Project\\MetaExcel2Code\\MetaExcel2Code\\MetaExcel2CodeProgram\\obj\\",

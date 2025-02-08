@@ -22,7 +22,9 @@ internal abstract class Program
 
     private static string _tenantAccessToken = null!;
 
-    private static readonly Dictionary<string, TypeConfig> TypeConfigDict = new();
+    private static readonly Dictionary<string, TypeConfig> TypeConfigDict = [];
+
+    private static Dictionary<string, Dictionary<string, MappingType>> MappingTypeDict = [];
 
     public static async Task Main()
     {
@@ -71,10 +73,20 @@ internal abstract class Program
 
         List<CloudExcelSheetData> cloudExcelSheetDataList = await GetCloudExcelData();
 
-        ParseCloudExcel(cloudExcelSheetDataList);
+        Dictionary<string, SheetMappingStruct> sheetMappingStructs = ParseMappingCloudExcel(cloudExcelSheetDataList);
+
+        var (sheetStructDict, sheetFullStructDict) = ParseCloudExcel(cloudExcelSheetDataList);
+
+        string code = CodeGenerate.GenerateTsCode(sheetFullStructDict, sheetMappingStructs);
+
+        File.WriteAllText($"{AppConfigs.jsonExportPath!}/{AppConfigs.jsonFileName}",
+            JsonConvert.SerializeObject(sheetStructDict));
+        File.WriteAllText($"{AppConfigs.codeExportPath!}/{AppConfigs.codeFileName}", code);
     }
 
-    /** 应用配置检测 */
+    /// <summary>
+    /// 应用配置检测
+    /// </summary>
     private static void AppConfigsCheck()
     {
         Log.Information("开始进行应用配置检测");
@@ -113,7 +125,9 @@ internal abstract class Program
         }
     }
 
-    /** 获取Token */
+    /// <summary>
+    /// 获取Token
+    /// </summary>
     private static async Task GetTenantAccessToken()
     {
         Log.Information("开始获取 TenantAccessToken");
@@ -143,7 +157,9 @@ internal abstract class Program
         }
     }
 
-    /** 获取云数据表数据 */
+    /// <summary>
+    /// 获取云数据表信息
+    /// </summary>
     private static async Task<List<CloudExcelSheetData>> GetCloudExcelData()
     {
         Log.Information("==============================");
@@ -152,7 +168,7 @@ internal abstract class Program
         var client = new RestClient("https://open.feishu.cn/open-apis/sheets/v3/spreadsheets");
 
         var tasks = new List<Task<GetCloudExcelResp>>();
-        
+
         var semaphore = new SemaphoreSlim(3);
 
         foreach (CloudExcelUrl cloudExcelUrl in AppConfigs.cloudExcelUrls!)
@@ -248,7 +264,9 @@ internal abstract class Program
         return cloudExcelSheetDataList;
     }
 
-    /** 获取云数据表单元格数据 */
+    /// <summary>
+    /// 拿到云数据表信息后，获取所有单元格数据
+    /// </summary>
     private static async Task<List<CloudExcelSheetData>> GetCloudExcelCellData(
         GetCloudExcelDataResp cloudExcelDataResp,
         CloudExcelUrl cloudExcelUrl
@@ -280,23 +298,31 @@ internal abstract class Program
                 continue;
             }
 
-            if (response is { IsSuccessful: true, Content: not null })
+            try
             {
-                JObject jsonObj = JObject.Parse(response.Content);
-
-                GetCloudExcelCellDataResp cloudExcelCellDataResp =
-                    jsonObj["data"]?.ToObject<GetCloudExcelCellDataResp>() ??
-                    throw new Exception($"{cloudExcelUrl.name} 解析数据为空");
-
-                List<CloudExcelSheetData> cloudExcelSheetDataList = [];
-                for (var i = 0; i < cloudExcelCellDataResp.valueRanges.Count; i++)
+                if (response is { IsSuccessful: true, Content: not null })
                 {
-                    cloudExcelSheetDataList.Add(new CloudExcelSheetData(cloudExcelDataResp.sheets[i].title,
-                        cloudExcelCellDataResp.valueRanges[i].values));
-                }
+                    JObject jsonObj = JObject.Parse(response.Content);
 
-                return cloudExcelSheetDataList;
+                    GetCloudExcelCellDataResp cloudExcelCellDataResp =
+                        jsonObj["data"]?.ToObject<GetCloudExcelCellDataResp>() ??
+                        throw new Exception($"{cloudExcelUrl.name} 解析数据为空");
+
+                    List<CloudExcelSheetData> cloudExcelSheetDataList = [];
+                    for (var i = 0; i < cloudExcelCellDataResp.valueRanges.Count; i++)
+                    {
+                        cloudExcelSheetDataList.Add(new CloudExcelSheetData(cloudExcelDataResp.sheets[i].title,
+                            cloudExcelCellDataResp.valueRanges[i].values));
+                    }
+
+                    return cloudExcelSheetDataList;
+                }
             }
+            catch (Exception ex)
+            {
+                throw new Exception($"{cloudExcelUrl.name} 单元格数据获取失败 -- ${ex.Message}");
+            }
+
 
             Log.Error($"StatusCode: {response.StatusCode}");
             Log.Error($"Content: {response.Content}");
@@ -305,7 +331,50 @@ internal abstract class Program
         }
     }
 
-    private static void ParseCloudExcel(List<CloudExcelSheetData> cloudExcelSheetDataList)
+    /// <summary>
+    /// 解析用于映射的云数据表
+    /// </summary>
+    /// <param name="cloudExcelSheetDataList">云数据表</param>
+    private static Dictionary<string, SheetMappingStruct> ParseMappingCloudExcel(
+        List<CloudExcelSheetData> cloudExcelSheetDataList)
+    {
+        List<CloudExcelSheetData> mappingCloudExcelSheetDataList = [];
+
+        // 获取是用于映射的云数据表
+        cloudExcelSheetDataList.ForEach(cloudExcelSheetData =>
+        {
+            if (cloudExcelSheetData.name.StartsWith('$'))
+            {
+                mappingCloudExcelSheetDataList.Add(cloudExcelSheetData);
+            }
+        });
+
+        Dictionary<string, SheetMappingStruct> sheetMappingStructDict = [];
+        mappingCloudExcelSheetDataList.ForEach(
+            cloudExcelSheetData =>
+            {
+                SheetMappingStruct sheetMappingStruct = SheetParser.ParseMapping(cloudExcelSheetData);
+
+                Dictionary<string, MappingType> sheetMappingDict = [];
+                for (var i = 0; i < sheetMappingStruct.mappings.Count; i++)
+                {
+                    sheetMappingDict.Add(sheetMappingStruct.mappings[i],
+                        new MappingType(sheetMappingStruct.sheetFullStruct.types[0], sheetMappingStruct.keys[i]));
+                }
+                
+                MappingTypeDict.Add(cloudExcelSheetData.name[1..], sheetMappingDict);
+                sheetMappingStructDict.Add(cloudExcelSheetData.name[1..], sheetMappingStruct);
+            });
+
+        return sheetMappingStructDict;
+    }
+
+    /// <summary>
+    /// 解析云数据表
+    /// </summary>
+    /// <param name="cloudExcelSheetDataList">云数据表</param>
+    private static (Dictionary<string, SheetStruct> sheetStructDict, Dictionary<string, SheetFullStruct>
+        sheetFullStructDict) ParseCloudExcel(List<CloudExcelSheetData> cloudExcelSheetDataList)
     {
         Log.Information("已获取到所有云数据表，开始解析");
 
@@ -316,16 +385,17 @@ internal abstract class Program
 
         foreach (CloudExcelSheetData cloudExcelSheetData in cloudExcelSheetDataList)
         {
+            if (cloudExcelSheetData.name.StartsWith('$'))
+            {
+                continue;
+            }
+
             SheetFullStruct sheetFullStruct = SheetParser.Parse(cloudExcelSheetData);
             sheetStructDict.Add(cloudExcelSheetData.name, sheetFullStruct.sheetStruct);
             sheetFullStructDict.Add(cloudExcelSheetData.name, sheetFullStruct);
         }
 
-        string code = CodeGenerate.GenerateTsCode(sheetFullStructDict);
-
-        File.WriteAllText($"{AppConfigs.jsonExportPath!}/{AppConfigs.jsonFileName}",
-            JsonConvert.SerializeObject(sheetStructDict));
-        File.WriteAllText($"{AppConfigs.codeExportPath!}/{AppConfigs.codeFileName}", code);
+        return (sheetStructDict, sheetFullStructDict);
     }
 
     public static bool IsCustomType(string type)
@@ -336,5 +406,15 @@ internal abstract class Program
     public static TypeConfig GetCustomType(string type)
     {
         return TypeConfigDict[type];
+    }
+
+    public static bool IsMappingType(string type)
+    {
+        return MappingTypeDict.ContainsKey(type);
+    }
+
+    public static MappingType GetMappingType(string type, string mapping)
+    {
+        return MappingTypeDict[type][mapping];
     }
 }

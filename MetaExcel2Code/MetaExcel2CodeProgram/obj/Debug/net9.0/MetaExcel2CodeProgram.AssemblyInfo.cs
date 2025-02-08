@@ -10,13 +10,13 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("MetaExcel2CodeProgram")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("me2c-local")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+438056edce6561cc734195b85183b8212479e7b2")]
-[assembly: System.Reflection.AssemblyProductAttribute("MetaExcel2CodeProgram")]
-[assembly: System.Reflection.AssemblyTitleAttribute("MetaExcel2CodeProgram")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("2.1.2.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.1.2+1e387ed50a22d30f1b196c13c0ff24c56df342d4")]
+[assembly: System.Reflection.AssemblyProductAttribute("me2c-local")]
+[assembly: System.Reflection.AssemblyTitleAttribute("me2c-local")]
+[assembly: System.Reflection.AssemblyVersionAttribute("2.1.2.0")]
 
 // 由 MSBuild WriteCodeFragment 类生成。
 

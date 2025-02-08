@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using MetaExcel2CodeForFeiShu.Models;
 using MetaExcel2CodeProgram.ExcelPipeLine;
+using Serilog;
 
 namespace MetaExcel2CodeForFeiShu.ExcelPipeLine;
 
@@ -14,7 +15,7 @@ public static class CellParser
             {
                 throw new Exception("number 类型不能为空");
             }
-            
+
             if (double.TryParse(value, out double num))
             {
                 return num;
@@ -34,17 +35,17 @@ public static class CellParser
             {
                 throw new Exception("boolean 类型不能为空");
             }
-            
-            return bool.Parse(value) ? 1 : 0;
+
+            return bool.Parse(value);
         }
 
-        if (typeStruct.type == "Array" && typeStruct.generic != null)
+        if (typeStruct is { type: "Array", generic: not null })
         {
             if (value is null)
             {
                 throw new Exception("Array 类型不能为空");
             }
-            
+
             if (value.StartsWith('[') && value.EndsWith(']'))
             {
                 string inner = value.Substring(1, value.Length - 2);
@@ -56,12 +57,43 @@ public static class CellParser
             throw new Exception($"{value} 不是 Array 类型");
         }
 
+        if (typeStruct is { type: "Mapping", generic: not null })
+        {
+            if (Program.IsMappingType(typeStruct.generic))
+            {
+                if (value is null)
+                {
+                    throw new Exception("Mapping 类型不能为空");
+                }
+
+                if (typeStruct.generic is null)
+                {
+                    throw new Exception("Mapping 泛型不能为空");
+                }
+
+                MappingType mappingType;
+                try
+                {
+                    mappingType = Program.GetMappingType(typeStruct.generic, value);
+                }
+                catch
+                {
+                    throw new Exception($"{value} 不是 {typeStruct.generic} 类型");
+                }
+
+                return Parse(TypeParser.Parse(mappingType.type), mappingType.value);
+            }
+
+            throw new Exception($"{typeStruct.generic} 不是 Mapping 类型");
+        }
+
         if (Program.IsCustomType(typeStruct.type))
         {
             if (value == null)
             {
                 return null;
             }
+
             if (value.StartsWith('{') & value.EndsWith('}'))
             {
                 string inner = value.Substring(1, value.Length - 2);
@@ -77,6 +109,7 @@ public static class CellParser
                     object? itemValue = Parse(TypeParser.Parse(typeConfig.types[i].type), parts[i]);
                     tempDict.Add(typeConfig.types[i].name, itemValue);
                 }
+
                 return tempDict;
             }
 
@@ -85,7 +118,7 @@ public static class CellParser
 
         throw new Exception($"{typeStruct.type} 是未定义的类型");
     }
-    
+
     private static List<string> StringStructParse(string input, char leftBracket, char rightBracket, char separator)
     {
         var result = new List<string>();
@@ -107,6 +140,7 @@ public static class CellParser
                 {
                     stack.Pop();
                 }
+
                 // 把右括号也加入到当前 token
                 currentToken.Append(c);
 

@@ -6,11 +6,10 @@ namespace MetaExcel2CodeForFeiShu.ExcelPipeLine;
 public static class CodeGenerate
 {
     /// <summary>
-    /// 生成 TypeScript 接口代码
+    /// 生成 TS 代码
     /// </summary>
-    /// <param name="allSheets">数据: 表名 -> SheetStruct</param>
-    /// <returns>TS 接口定义字符串</returns>
-    public static string GenerateTsCode(Dictionary<string, SheetFullStruct> allSheets)
+    public static string GenerateTsCode(Dictionary<string, SheetFullStruct> allSheets,
+        Dictionary<string, SheetMappingStruct> mappings)
     {
         var sb = new StringBuilder();
 
@@ -141,13 +140,17 @@ public static class CodeGenerate
             for (var i = 0; i < sheetFullStruct.fields.Count; i++)
             {
                 sb.AppendLine($"    // {sheetFullStruct.annotations[i]}");
-                sb.AppendLine($"    {sheetFullStruct.fields[i]}: {sheetFullStruct.types[i]};");
+                TypeStruct type = TypeParser.Parse(sheetFullStruct.types[i]);
+                if (type.type == "Mapping")
+                    sb.AppendLine($"    {sheetFullStruct.fields[i]}: {type.generic}Enum;");
+                else
+                    sb.AppendLine($"    {sheetFullStruct.fields[i]}: {sheetFullStruct.types[i]}");
             }
 
             sb.AppendLine("}");
             sb.AppendLine();
         }
-        
+
         sb.AppendLine("// ==================== 数据表类型映射 ====================");
         sb.AppendLine();
 
@@ -156,9 +159,10 @@ public static class CodeGenerate
         {
             sb.AppendLine($"    {sheetName}: {sheetName}");
         }
+
         sb.AppendLine("}");
         sb.AppendLine();
-        
+
         sb.AppendLine("// ==================== 数据表字面量枚举 ====================");
         sb.AppendLine();
 
@@ -167,7 +171,23 @@ public static class CodeGenerate
         {
             sb.AppendLine($"    {sheetName} = \"{sheetName}\",");
         }
+        
+        sb.AppendLine();
         sb.AppendLine("}");
+        
+        sb.AppendLine("// ==================== 数据表映射枚举 ====================");
+        sb.AppendLine();
+        
+        foreach (var (key, value) in mappings)
+        {
+            sb.AppendLine($"export enum {key}Enum {{");
+            for (var i = 0; i < value.mappings.Count; i++)
+            {
+                sb.AppendLine($"    {value.codes[i]} = {value.keys[i]},");
+            }
+            sb.AppendLine("}");
+            sb.AppendLine();
+        }
 
         return sb.ToString();
     }

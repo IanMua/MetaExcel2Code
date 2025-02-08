@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaExcel2CodeForFeiShu", "MetaExcel2CodeForFeiShu\MetaExcel2CodeForFeiShu.csproj", "{6DE536FF-8E69-41EC-B6D8-E939FA38074F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaExcel2CodeProgram", "MetaExcel2CodeProgram\MetaExcel2CodeProgram.csproj", "{7BEDA978-0EE7-4F41-A216-961594D7580C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{6DE536FF-8E69-41EC-B6D8-E939FA38074F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DE536FF-8E69-41EC-B6D8-E939FA38074F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DE536FF-8E69-41EC-B6D8-E939FA38074F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BEDA978-0EE7-4F41-A216-961594D7580C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BEDA978-0EE7-4F41-A216-961594D7580C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BEDA978-0EE7-4F41-A216-961594D7580C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BEDA978-0EE7-4F41-A216-961594D7580C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,28 +1,39 @@
 ﻿using MetaExcel2CodeProgram.ExcelPipeLine;
+using MetaExcel2CodeProgram.Models;
 using Newtonsoft.Json;
 using OfficeOpenXml;
 using Serilog;
-using Serilog.Core;
-using Serilog.Events;
 
 namespace MetaExcel2CodeProgram;
 
 public abstract class Program
 {
-    private static LoggingLevelSwitch _levelSwitch = null!;
+    private static bool _success = true;
 
-    private static AppConfig _appConfig = null!;
+    private const string AppConfigsFilename =
+        "./AppConfigs.json";
 
-    private static readonly Dictionary<string, TypeConfig> TypeConfigDict = new();
+    public static AppConfigs AppConfigs = null!;
 
-    public static void Main(string[] args)
+    private static readonly Dictionary<string, TypeConfig> TypeConfigDict = [];
+
+    private static Dictionary<string, Dictionary<string, MappingType>> MappingTypeDict = [];
+
+    public static void Main()
     {
-        _levelSwitch = new LoggingLevelSwitch();
-
+        const string logFilePath = "log.txt";
+        if (File.Exists(logFilePath)) File.Delete(logFilePath);
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Console()
-            .WriteTo.File("log.txt")
-            .MinimumLevel.ControlledBy(_levelSwitch)
+            .WriteTo.File(
+                "log.txt",
+                rollingInterval: RollingInterval.Infinite,
+                fileSizeLimitBytes: null,
+                rollOnFileSizeLimit: false,
+                retainedFileCountLimit: null,
+                shared: true
+            )
+            .MinimumLevel.Information()
             .CreateLogger();
 
         try
@@ -33,120 +44,170 @@ public abstract class Program
         }
         catch (Exception ex)
         {
-            Log.Error("Error: {Message}", ex.Message);
+            _success = false;
+            Log.Error("Error: {Message}", $"{ex.Message}\n{ex.StackTrace}");
         }
         finally
         {
+            if (_success) Log.Information("文件导出成功！");
+            else Log.Error("文件导出失败");
+
             Log.CloseAndFlush();
+
+            Console.ReadKey();
         }
     }
 
-    /** 运行应用 */
     private static void RunApplication()
     {
-        string appConfigFilePath =
-            "F:/Project/Learn/C#/MetaExcel2Code/MetaExcel2Code/MetaExcel2CodeProgram/Configs/AppConfig.json";
-        string typeConfigFilePath =
-            "F:/Project/Learn/C#/MetaExcel2Code/MetaExcel2Code/MetaExcel2CodeProgram/Configs/TypeConfig.json";
+        AppConfigsCheck();
 
-        if (!File.Exists(appConfigFilePath)) throw new Exception("AppConfig.json 文件不存在");
-        string appConfigJsonFile = File.ReadAllText(appConfigFilePath);
-        if (string.IsNullOrWhiteSpace(appConfigJsonFile)) throw new Exception("AppConfig.json 文件内容为空");
+        List<StandardExcelSheetData> cloudExcelSheetDataList = GetLocalExcelData();
 
-        // 序列化校验
+        // Dictionary<string, SheetMappingStruct> sheetMappingStructs = ParseMappingCloudExcel(cloudExcelSheetDataList);
+
+        var (sheetStructDict, sheetFullStructDict) = ParseLocalExcel(cloudExcelSheetDataList);
+
+        string code = CodeGenerate.GenerateTsCode(sheetFullStructDict, []);
+
+        File.WriteAllText($"{AppConfigs.jsonExportPath!}/{AppConfigs.jsonFileName}",
+            JsonConvert.SerializeObject(sheetStructDict));
+        File.WriteAllText($"{AppConfigs.codeExportPath!}/{AppConfigs.codeFileName}", code);
+    }
+
+    /// <summary>
+    /// 应用配置检测
+    /// </summary>
+    private static void AppConfigsCheck()
+    {
+        Log.Information("开始进行应用配置检测");
+
+        if (!File.Exists(AppConfigsFilename)) throw new Exception("应用配置文件丢失");
+
+        string appConfigsFile = File.ReadAllText(AppConfigsFilename);
+        if (string.IsNullOrWhiteSpace(appConfigsFile)) throw new Exception("应用配置文件为空");
+
         try
         {
-            _appConfig = JsonConvert.DeserializeObject<AppConfig>(appConfigJsonFile) ?? throw new Exception();
+            AppConfigs = JsonConvert.DeserializeObject<AppConfigs>(appConfigsFile) ??
+                         throw new InvalidOperationException();
         }
         catch (Exception)
         {
-            throw new Exception("AppConfig.json 文件内容错误，无法反序列化");
+            throw new Exception("应用配置文件反序列化失败");
         }
 
-        //AppConfig 合法性校验
-        if (!Directory.Exists(_appConfig.excelRootPath))
-        {
-            Log.Warning($"AppConfig.json excelRootPath - {_appConfig.excelRootPath} 该目录不存在");
+        if (string.IsNullOrWhiteSpace(AppConfigs.jsonExportPath)) throw new Exception("JSON导出目录为空");
+        if (!Directory.Exists(AppConfigs.jsonExportPath)) Directory.CreateDirectory(AppConfigs.jsonExportPath);
+        if (string.IsNullOrWhiteSpace(AppConfigs.jsonFileName)) throw new Exception("JSON文件名为空");
 
-            Directory.CreateDirectory(_appConfig.excelRootPath);
-            
-            Log.Warning($"AppConfig.json excelRootPath - {_appConfig.excelRootPath} 该目录已创建");
+        if (string.IsNullOrWhiteSpace(AppConfigs.codeExportPath)) throw new Exception("代码导出目录为空");
+        if (!Directory.Exists(AppConfigs.codeExportPath)) Directory.CreateDirectory(AppConfigs.codeExportPath);
+        if (string.IsNullOrWhiteSpace(AppConfigs.codeFileName)) throw new Exception("代码文件名为空");
+
+        if (string.IsNullOrWhiteSpace(AppConfigs.appId)) throw new Exception("飞书应用ID位空");
+        if (string.IsNullOrWhiteSpace(AppConfigs.appSecret)) throw new Exception("飞书应用密钥为空");
+        if (AppConfigs.cloudExcelUrls is null) throw new Exception("飞书云数据表配置项为空");
+
+        if (AppConfigs.typeList is null) return;
+        foreach (TypeConfig typeConfig in AppConfigs.typeList)
+        {
+            TypeConfigDict.Add(typeConfig.name, typeConfig);
+        }
+    }
+
+    /// <summary>
+    /// 获取本地数据表信息
+    /// </summary>
+    private static List<StandardExcelSheetData> GetLocalExcelData()
+    {
+        Log.Information("==============================");
+        Log.Information("开始获取本地Excel数据");
+        
+        // 获取当前工作目录
+        string currentDirectory = Directory.GetCurrentDirectory();
+        
+        // 定义搜索模式，获取所有以 .xlsx 结尾的文件
+        string searchPattern = "*.xlsx";
+        
+        // 获取文件列表并过滤掉以 "~" 开头的文件（Excel 的临时文件）
+        string[] excelFiles = Directory.GetFiles(currentDirectory, searchPattern)
+            .Where(file => !Path.GetFileName(file).StartsWith("~"))
+            .ToArray();
+        
+        List<StandardExcelSheetData> cloudExcelSheetDataList = [];
+        
+        // 检查是否找到文件
+        if (excelFiles.Length == 0)
+        {
+            return cloudExcelSheetDataList;
         }
 
-        if (!Directory.Exists(_appConfig.jsonExportPath))
+        foreach (string file in excelFiles)
         {
-            Log.Warning($"AppConfig.json jsonExportPath - {_appConfig.jsonExportPath} 该目录不存在");
-            
-            Directory.CreateDirectory(_appConfig.jsonExportPath);
-            
-            Log.Warning($"AppConfig.json jsonExportPath - {_appConfig.jsonExportPath} 该目录已创建");
-        }
-
-        if (!Directory.Exists(_appConfig.codeExportPath))
-        {
-            Log.Warning($"AppConfig.json codeExportPath - {_appConfig.codeExportPath} 该目录不存在");
-            
-            Directory.CreateDirectory(_appConfig.codeExportPath);
-            
-            Log.Warning($"AppConfig.json codeExportPath - {_appConfig.codeExportPath} 该目录已创建");
-        }
-
-        // 设置日志级别
-        _levelSwitch.MinimumLevel = _appConfig.logger switch
-        {
-            "info" => LogEventLevel.Information,
-            "warning" => LogEventLevel.Warning,
-            "error" => LogEventLevel.Error,
-            _ => LogEventLevel.Information
-        };
-
-        if (File.Exists(typeConfigFilePath))
-        {
-            string typeConfigJsonFile = File.ReadAllText(typeConfigFilePath);
-            if (string.IsNullOrWhiteSpace(typeConfigJsonFile)) throw new Exception("TypeConfig.json 文件内容为空");
-            try
+            using ExcelPackage package = new ExcelPackage(new FileInfo(file));
+            int maxCount = package.Workbook.Worksheets.Count;
+            for (int i = 0; i < maxCount; i++)
             {
-                List<TypeConfig>? typeConfigs = JsonConvert.DeserializeObject<List<TypeConfig>>(typeConfigJsonFile);
-                if (typeConfigs != null)
-                {
-                    foreach (TypeConfig typeConfig in typeConfigs)
-                    {
-                        TypeConfigDict.Add(typeConfig.name, typeConfig);
-                    }
-                }
+                 var worksheet = package.Workbook.Worksheets[i];
+                 
+                 Log.Information($"sheet表：{worksheet.Name}");
+                 
+                 List<List<string?>> values = [];
+                 
+                 for (int row = 1; row <= worksheet.Dimension.Rows; row++)
+                 {
+                     try
+                     {
+                         List<string?> rowData = [];
+                         for (int col = 1; col <= worksheet.Dimension.Columns; col++)
+                         {
+                             var cellValue = worksheet.Cells[row, col].Value?.ToString() ?? null;
+                             rowData.Add(cellValue);
+                         }
 
-                Log.Information("自定义类型 {Value}", JsonConvert.SerializeObject(TypeConfigDict.Keys));
-            }
-            catch (Exception)
-            {
-                throw new Exception("TypeConfig.json 文件内容错误，无法反序列化");
+                         values.Add(rowData);
+                     }
+                     catch (Exception ex)
+                     {
+                         throw new Exception($"sheet表：{worksheet.Name}，第{row}行解析失败：{ex.Message}\n{ex.StackTrace}");
+                     }
+                 }
+                 
+                 cloudExcelSheetDataList.Add(new StandardExcelSheetData(worksheet.Name, values));
             }
         }
-
-        WorkSpacePipe();
+        
+        return cloudExcelSheetDataList;
     }
 
-    private static void Test()
+    /// <summary>
+    /// 解析本地数据表
+    /// </summary>
+    /// <param name="cloudExcelSheetDataList">云数据表</param>
+    private static (Dictionary<string, SheetStruct> sheetStructDict, Dictionary<string, SheetFullStruct>
+        sheetFullStructDict) ParseLocalExcel(List<StandardExcelSheetData> cloudExcelSheetDataList)
     {
-        string path = @"F:\Project\Work\MGF\SlimeAssemble\Game_SlimeAssemble\SlimeAssemble\ExcelExporter\lzy\测试2.xlsx";
+        Log.Information("已获取到所有本地数据表，开始解析");
 
-        using ExcelPackage package = new ExcelPackage(new FileInfo(path));
-        var worksheet = package.Workbook.Worksheets[0];
+        // 最终数据字典
+        Dictionary<string, SheetStruct> sheetStructDict = [];
 
-        SheetStruct sheetData = SheetParser.Parse(worksheet);
-        Log.Information("sheetData: {Value}", JsonConvert.SerializeObject(sheetData));
-    }
+        Dictionary<string, SheetFullStruct> sheetFullStructDict = [];
 
-    /** 工作空间流 */
-    private static void WorkSpacePipe()
-    {
-        string?[] directories = Directory.GetDirectories(_appConfig.excelRootPath);
-        if (directories == null || directories.Length == 0) throw new Exception("工作空间为空，请先创建工作空间");
-    }
+        foreach (StandardExcelSheetData cloudExcelSheetData in cloudExcelSheetDataList)
+        {
+            if (cloudExcelSheetData.name.StartsWith('$'))
+            {
+                continue;
+            }
 
-    private static void LoadWorkSpace(string workSpacePath)
-    {
-        if (!Directory.Exists(workSpacePath)) throw new Exception($"{workSpacePath} 工作空间不存在");
+            SheetFullStruct sheetFullStruct = SheetParser.Parse(cloudExcelSheetData);
+            sheetStructDict.Add(cloudExcelSheetData.name, sheetFullStruct.sheetStruct);
+            sheetFullStructDict.Add(cloudExcelSheetData.name, sheetFullStruct);
+        }
+
+        return (sheetStructDict, sheetFullStructDict);
     }
 
     public static bool IsCustomType(string type)
@@ -157,5 +218,15 @@ public abstract class Program
     public static TypeConfig GetCustomType(string type)
     {
         return TypeConfigDict[type];
+    }
+
+    public static bool IsMappingType(string type)
+    {
+        return MappingTypeDict.ContainsKey(type);
+    }
+
+    public static MappingType GetMappingType(string type, string mapping)
+    {
+        return MappingTypeDict[type][mapping];
     }
 }

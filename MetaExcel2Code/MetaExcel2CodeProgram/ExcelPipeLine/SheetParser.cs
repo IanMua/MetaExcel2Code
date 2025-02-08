@@ -1,43 +1,74 @@
-﻿using OfficeOpenXml;
+﻿using MetaExcel2CodeProgram.Models;
+using MetaExcel2CodeProgram.Tools;
 
 namespace MetaExcel2CodeProgram.ExcelPipeLine;
 
 public static class SheetParser
 {
-    public static SheetStruct Parse(ExcelWorksheet sheet)
+    /// <summary>
+    /// 解析普通数据表
+    /// </summary>
+    public static SheetFullStruct Parse(StandardExcelSheetData sheet)
     {
         // 工作表名称
-        string sheetName = sheet.Name;
+        string sheetName = sheet.name;
 
-        int totalRows = sheet.Dimension.End.Row;
-        int totalColumns = sheet.Dimension.End.Column;
+        int totalRows = sheet.values.Count;
+        int totalColumns = sheet.values[0].Count;
 
         TypeStruct[] typeStructs = new TypeStruct[totalColumns];
+
+        // 字段
+        List<string> fields = [];
+
+        // 类型
+        List<string> types = [];
+
+        // 注释
+        List<string?> annotations = [];
 
         // KEY列
         List<string> keyCols = [];
 
-        List<Dictionary<string, object>> sheetData = [];
+        List<Dictionary<string, object?>> sheetData = [];
 
-        for (int col = 1; col <= totalColumns; col++)
+        for (int col = 0; col < totalColumns; col++)
         {
-            string colName = sheet.Cells[1, col].Text;
+            string? colName = sheet.values[0][col];
             if (string.IsNullOrWhiteSpace(colName))
             {
-                throw new Exception($"[{sheetName} 表] [{1}行, {col}列] -- 字段不能为空");
+                // 判断后一个单元格是不是也是空，如果是空，那就代表这是空置的单元格，不解析，结束
+                if (string.IsNullOrWhiteSpace(sheet.values[0][Math.Min(col + 1, totalColumns - 1)]))
+                {
+                    break;
+                }
+
+                throw new Exception($"[sheet表 {sheetName}] [1行, {ExcelTools.NumberToLetters(col + 1)}列] -- 字段不能为空");
             }
-            
-            string colValue = sheet.Cells[2, col].Text;
+
+            // 如果是 `//` 代表是注释 跳过
+            if (colName == "//") continue;
+
+            fields.Add(colName);
+
+            string? annotation = sheet.values[1][col];
+            annotations.Add(annotation);
+
+            string? colValue = sheet.values[2][col];
+            if (string.IsNullOrWhiteSpace(colValue))
+            {
+                throw new Exception($"[{sheetName} 表] [2行, {ExcelTools.NumberToLetters(col + 1)}列] -- 类型不能为空");
+            }
 
             TypeStruct type;
             try
             {
                 type = TypeParser.Parse(colValue);
-                typeStructs[col - 1] = type;
+                typeStructs[col] = type;
             }
             catch (Exception ex)
             {
-                throw new Exception($"[{sheetName} 表] [{2}行, {col}列] -- {ex.Message}");
+                throw new Exception($"[{sheetName} 表] [{3}行, {ExcelTools.NumberToLetters(col + 1)}列] -- {ex.Message}");
             }
 
             // 如果是 `id` 代表本列是主键，添加到主键列表
@@ -45,54 +76,248 @@ public static class SheetParser
             {
                 keyCols.Add(colName);
             }
+
+            types.Add(type.constraint is null ? colValue : type.type);
         }
 
-        for (int row = 3; row <= totalRows; row++)
+        for (int row = 3; row < totalRows; row++)
         {
-            // 如果本行第一列字体是斜体，代表本行是注释，跳过
-            if (sheet.Cells[row, 1].Style.Font.Italic) continue;
+            // 如果本行第一列是 `//` 代表本行是注释，跳过
+            if (sheet.values[row][0] == "//") continue;
+
+            // 如果本行第一列是空，并且本行最后一列是空，代表本行为空
+            if (sheet.values[row][0] == null && sheet.values[row][totalColumns - 1] == null)
+            {
+                // 如果下一行同上，代表剩下数据都是空的，停止解析
+                if (sheet.values[Math.Min(row + 1, totalRows - 1)][0] == null &&
+                    sheet.values[Math.Min(row + 1, totalRows - 1)][totalColumns - 1] == null)
+                {
+                    break;
+                }
+            }
 
             // 行数据
-            Dictionary<string, object> rowData = [];
+            Dictionary<string, object?> rowData = [];
 
-            for (int col = 1; col <= totalColumns; col++)
+            for (int col = 0; col < totalColumns; col++)
             {
                 // 如果是 `//` 代表本列是注释，跳过
-                if (sheet.Cells[1, col].Text == "//") continue;
+                if (sheet.values[0][col] == "//") continue;
+
+                // 如果本单元格是空，并且第一行单元格是空(这么做是防止是string类型和自定义类型可以为空，导致跳过解析)，并且后面一个单元格也是空，那就停止解析当前行剩下的单元格
+                if (string.IsNullOrWhiteSpace(sheet.values[row][col]) &&
+                    string.IsNullOrWhiteSpace(sheet.values[0][col]) &&
+                    string.IsNullOrWhiteSpace(sheet.values[row][Math.Min(col + 1, totalColumns - 1)]))
+                {
+                    break;
+                }
 
                 // 读取实际值（公式值/文本）
-                string? cellValue = sheet.Cells[row, col].Value.ToString();
+                string? cellValue = sheet.values[row][col];
 
                 if (cellValue == null)
                 {
-                    if (typeStructs[col - 1].type == "string")
+                    if (typeStructs[col].type == "string")
                     {
                         cellValue = "";
                     }
+                    // 自定义类型允许为空
+                    else if (Program.IsCustomType(typeStructs[col].type))
+                    {
+                    }
                     else
                     {
-                        throw new Exception($"[{sheetName} 表] [{row}行, {col}列] -- 值不能为空");
+                        throw new Exception(
+                            $"[{sheetName} 表] [{row + 1}行, {ExcelTools.NumberToLetters(col + 1)}列] -- 值不能为空");
                     }
                 }
 
                 try
                 {
-                    object parseValue = CellParser.Parse(typeStructs[col - 1], cellValue);
-                    rowData.Add(sheet.Cells[1, col].Text, parseValue);
+                    object? parseValue = CellParser.Parse(typeStructs[col], cellValue);
+                    rowData.Add(sheet.values[0][col]!, parseValue);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception($"[{sheetName} 表] [{row}行, {col}列] -- {ex.Message}");
+                    throw new Exception(
+                        $"[{sheetName} 表] [{row + 1}行, {ExcelTools.NumberToLetters(col + 1)}列] -- {ex.Message}");
                 }
             }
-            
+
             sheetData.Add(rowData);
         }
 
-        return new SheetStruct
+        if (keyCols.Count == 0)
         {
-            sheetKeys = keyCols.ToArray(),
-            sheetData = sheetData
-        };
+            keyCols.Add(fields[0]);
+        }
+
+        return new SheetFullStruct(
+            fields,
+            types,
+            annotations,
+            new SheetStruct
+            {
+                sheetKeys = keyCols,
+                sheetData = sheetData
+            }
+        );
+    }
+
+    /// <summary>
+    /// 解析映射数据表
+    /// </summary>
+    public static SheetMappingStruct ParseMapping(StandardExcelSheetData sheet)
+    {
+        // 字段
+        List<string> fields = [];
+
+        // 类型
+        List<string> types = [];
+
+        // 注释
+        List<string?> annotations = [];
+
+        List<TypeStruct> typeStructs = [];
+
+        List<Dictionary<string, object?>> sheetData = [];
+
+        List<string> mappings = [];
+
+        List<string> keys = [];
+
+        List<string> codes = [];
+        
+        List<string> keyCols = [];
+
+        int totalRows = sheet.values.Count;
+        int totalColumns = sheet.values[0].Count;
+
+        for (int col = 0; col < totalColumns; col++)
+        {
+            string? colName = sheet.values[0][col];
+            if (string.IsNullOrWhiteSpace(colName))
+            {
+                // 判断后一个单元格是不是也是空，如果是空，那就代表这是空置的单元格，不解析，结束
+                if (string.IsNullOrWhiteSpace(sheet.values[0][Math.Min(col + 1, totalColumns - 1)]))
+                {
+                    break;
+                }
+
+                throw new Exception($"[sheet表 {sheet.name}] [1行, {ExcelTools.NumberToLetters(col + 1)}列] -- 字段不能为空");
+            }
+
+            if (col == 1)
+            {
+                fields.Add(sheet.values[0][col]!);
+
+                string? annotation = sheet.values[1][col];
+                annotations.Add(annotation);
+
+                string? colValue = sheet.values[2][col];
+                if (string.IsNullOrWhiteSpace(colValue))
+                {
+                    throw new Exception($"[{sheet.name} 表] [2行, {ExcelTools.NumberToLetters(col + 1)}列] -- 类型不能为空");
+                }
+
+                try
+                {
+                    var type = TypeParser.Parse(colValue);
+                    typeStructs.Add(type);
+
+                    types.Add(type.constraint is null ? colValue : type.type);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(
+                        $"[{sheet.name} 表] [3行, {ExcelTools.NumberToLetters(col + 1)}列] -- {ex.Message}");
+                }
+            }
+        }
+
+        for (int row = 3; row < totalRows; row++)
+        {
+            // 如果本行第一列是 `//` 代表本行是注释，跳过
+            if (sheet.values[row][0] == "//") continue;
+
+            // 如果本行第一列是空，并且本行最后一列是空，代表本行为空
+            if (sheet.values[row][0] == null && sheet.values[row][totalColumns - 1] == null)
+            {
+                // 如果下一行同上，代表剩下数据都是空的，停止解析
+                if (sheet.values[Math.Min(row + 1, totalRows - 1)][0] == null &&
+                    sheet.values[Math.Min(row + 1, totalRows - 1)][totalColumns - 1] == null)
+                {
+                    break;
+                }
+            }
+
+            // 行数据
+            Dictionary<string, object?> rowData = [];
+
+            for (int col = 0; col < totalColumns; col++)
+            {
+                // 如果本单元格是空，并且第一行单元格是空(这么做是防止是string类型和自定义类型可以为空，导致跳过解析)，并且后面一个单元格也是空，那就停止解析当前行剩下的单元格
+                if (string.IsNullOrWhiteSpace(sheet.values[row][col]) &&
+                    string.IsNullOrWhiteSpace(sheet.values[0][col]) &&
+                    string.IsNullOrWhiteSpace(sheet.values[row][Math.Min(col + 1, totalColumns - 1)]))
+                {
+                    break;
+                }
+
+                // 读取实际值（公式值/文本）
+                string? cellValue = sheet.values[row][col];
+
+                if (cellValue == null)
+                {
+                    throw new Exception(
+                        $"[{sheet.name} 表] [{row + 1}行, {ExcelTools.NumberToLetters(col + 1)}列] -- 值不能为空");
+                }
+
+                switch (col)
+                {
+                    case 0:
+                        mappings.Add(cellValue);
+                        break;
+                    case 1:
+                        try
+                        {
+                            object? parseValue = CellParser.Parse(typeStructs[0], cellValue);
+                            rowData.Add(sheet.values[0][col]!, parseValue);
+                            keys.Add(cellValue);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception(
+                                $"[{sheet.name} 表] [{row + 1}行, {ExcelTools.NumberToLetters(col + 1)}列] -- {ex.Message}");
+                        }
+                        break;
+                    case 2:
+                        codes.Add(cellValue);
+                        break;
+                }
+            }
+
+            sheetData.Add(rowData);
+        }
+        
+        if (keyCols.Count == 0)
+        {
+            keyCols.Add(fields[0]);
+        }
+
+        return new SheetMappingStruct(
+            new SheetFullStruct(
+                fields,
+                types,
+                annotations,
+                new SheetStruct
+                {
+                    sheetKeys = keyCols,
+                    sheetData = sheetData
+                }),
+            mappings,
+            keys,
+            codes
+            );
     }
 }
